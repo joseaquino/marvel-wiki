@@ -1,0 +1,11 @@
+@import 'reset';
+@import 'variables/colors';
+
+html {
+	font-size: 10px;
+}
+
+body {
+	background-color: $thanos-purple-500;
+	font-size: 1.5rem;
+}
