@@ -1,0 +1,18 @@
+{
+  "name": "marvel-wiki-app",
+  "version": "1.0.0",
+  "author": "Jose Aquino <joseaquino@logikode.tech",
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "next": "latest",
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0"
+  },
+  "license": "MIT",
+  "keywords": [],
+  "description": "A Marvel universe of characters, comics and stories navigator."
+}
