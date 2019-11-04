@@ -1,0 +1,25 @@
+@import 'variables/colors';
+
+.brand-header {
+	height: 48px;
+	background-color: $marvel-red;
+	position: relative;
+
+	&:before {
+		content: "";
+		position: absolute;
+		top: 24px;
+		left: 50%;
+		margin-left: -160px;
+		background-image: url('../../assets/images/marvel-logo-tab.svg');
+		width: 320px;
+		height: 80px;
+	}
+
+	img {
+		margin: 0 auto;
+		padding-top: 6px;
+		display: block;
+		position: relative;
+	}
+}
