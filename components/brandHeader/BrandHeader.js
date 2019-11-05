@@ -10,6 +10,7 @@ const BrandHeader = () => (
 				<img src={require('../../assets/images/marvel-logo.svg')} alt="Marvel comics logo image"/>
 			</a>
 		</Link>
+		<div id="progress-bar" />
 	</div>
 );
 

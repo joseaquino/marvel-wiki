@@ -15,14 +15,33 @@
 		background-image: url('../../assets/images/marvel-logo-tab.svg');
 		width: 320px;
 		height: 80px;
+		z-index: 10;
 	}
 
 	.brand-logo {
 		position: relative;
 		display: inline-block;
+		z-index: 15;
 
 		img {
 			padding-top: 6px;
+		}
+	}
+
+	#progress-bar {
+		position: absolute;
+		bottom: -3px;
+		height: 3px;
+		width: 100%;
+
+		.bar {
+			background-color: $bright-yellow;
+			height: 3px;
+			z-index: 5;
+		}
+
+		.peg {
+			box-shadow: 0 0 10px $bright-yellow, 0 0 5px $bright-yellow;
 		}
 	}
 }
