@@ -1,0 +1,60 @@
+@import 'variables/colors';
+
+.nav-container {
+	margin-top: 60px;
+	text-align: center;
+
+	nav {
+		border: 3px solid $marvel-red;
+		width: 528px;
+		height: 48px;
+		border-radius: 24px;
+		box-sizing: border-box;
+		display: inline-block;
+		background-color: $thanos-purple-400;
+		position: relative;
+
+		a {
+			height: 42px;
+			width: 33.333%;
+			vertical-align: middle;
+			line-height: 42px;
+			font-size: 1.5rem;
+			text-transform: uppercase;
+			color: $thanos-purple-300;
+			text-decoration: none;
+			display: inline-block;
+			z-index: 1;
+			position: relative;
+			transition: color .2s ease;
+
+			&.active {
+				font-weight: bold;
+				color: #FFFFFF;
+			}
+		}
+
+		.active-indicator {
+			position: absolute;
+			top: -3px;
+			bottom: -3px;
+			transition: left .2s ease;
+			width: 33.333%;
+			background-color: $marvel-red;
+			z-index: 0;
+			border-radius: 24px;
+		}
+
+		#characters-nav.active ~ .active-indicator {
+			left: 0;
+		}
+
+		#comics-nav.active ~ .active-indicator {
+			left: 33.333%;
+		}
+
+		#bookmarks-nav.active ~ .active-indicator {
+			left: 66.666%;
+		}
+	}
+}
