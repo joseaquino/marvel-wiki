@@ -4,6 +4,7 @@
 	height: 48px;
 	background-color: $marvel-red;
 	position: relative;
+	text-align: center;
 
 	&:before {
 		content: "";
@@ -16,10 +17,12 @@
 		height: 80px;
 	}
 
-	img {
-		margin: 0 auto;
-		padding-top: 6px;
-		display: block;
+	.brand-logo {
 		position: relative;
+		display: inline-block;
+
+		img {
+			padding-top: 6px;
+		}
 	}
 }
