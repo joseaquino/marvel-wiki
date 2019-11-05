@@ -1,13 +1,23 @@
 import { getCharactersList } from '../services/characters'
+import InfoCard from '../components/infoCard'
 
-const makeCharacterCard = ({ id, name, thumbnail }) => (
-	<div key={id} className="character-card">
-		<h1>{name}</h1>
-		<img src={`${thumbnail.path}.${thumbnail.extension}`} />
-	</div>
-)
-
-const CharactersPage = ({ characters }) => characters.map(makeCharacterCard)
+const CharactersPage = ({ characters }) => {
+	return (
+		<div className="main-container">
+			<div className="info-cards">
+				{
+					characters.map(({ id, name, thumbnail }) => (
+						<InfoCard
+							id={id}
+							name={name}
+							thumbnail={thumbnail}
+						/>
+					))
+				}
+			</div>
+		</div>
+	)
+}
 
 CharactersPage.getInitialProps = async () => {
 	const characters = await getCharactersList()

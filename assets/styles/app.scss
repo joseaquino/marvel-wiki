@@ -10,3 +10,52 @@ body {
 	font-size: 1.5rem;
 	font-family: 'PT Sans', sans-serif;
 }
+
+img {
+	max-width: 100%;
+}
+
+.main-container {
+	margin: 48px auto;
+	padding: 0 2.0rem;
+	max-width: 768px;
+
+	.info-cards {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		grid-auto-rows: auto;
+		grid-column-gap: 2rem;
+		grid-row-gap: 2.4rem;
+		align-items: start;
+	}
+}
+
+@media only screen  and (min-width: 768px) {
+	.main-container {
+		max-width: 768px;
+
+		.info-cards {
+			grid-template-columns: repeat(3, 1fr);
+		}
+	}
+}
+
+@media only screen  and (min-width: 1024px) {
+	.main-container {
+		max-width: 1024px;
+
+		.info-cards {
+			grid-template-columns: repeat(4, 1fr);
+		}
+	}
+}
+
+@media only screen  and (min-width: 1500px) {
+	.main-container {
+		max-width: 1500px;
+
+		.info-cards {
+			grid-template-columns: repeat(5, 1fr);
+		}
+	}
+}
