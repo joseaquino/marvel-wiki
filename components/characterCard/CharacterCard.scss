@@ -8,6 +8,11 @@
 
 	.card-image {
 		position: relative;
+		overflow: hidden;
+
+		&:hover span {
+			transform: scale(1.2);
+		}
 
 		span {
 			width: 100%;
@@ -17,8 +22,9 @@
 			background-color: $thanos-purple-500;
 			background-size: cover;
 			display: block;
+			transition: transform 0.2s ease;
 		}
-		
+
 		svg {
 			position: absolute;
 			bottom: 0;
