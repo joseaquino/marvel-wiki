@@ -10,7 +10,7 @@ const pickComicValues = comic => ({
 })
 
 export const getComicsList = async () => {
-	const response = await marvelRequest('/comics', {})
+	const response = await marvelRequest('/comics', { formatType: 'comic', orderBy: 'issueNumber', limit: PER_PAGE })
 	const data = await response.json()
 	let comics = []
 
@@ -22,7 +22,7 @@ export const getComicsList = async () => {
 }
 
 export const getNextComicsPage = pageNumber =>
-	marvelRequest('/comics', { offset: pageNumber * PER_PAGE })
+	marvelRequest('/comics', { offset: pageNumber * PER_PAGE, formatType: 'comic', orderBy: 'issueNumber', limit: PER_PAGE })
 		.then(response => response.json())
 		.then(comics => 
 			comics.data && comics.data.results
