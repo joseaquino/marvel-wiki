@@ -1,6 +1,6 @@
 import fetch from 'isomorphic-unfetch'
 
-const ENDPOINT = 'http://gateway.marvel.com/v1/public'
+const ENDPOINT = 'https://gateway.marvel.com/v1/public'
 const MARVEL_PUBLIC_KEY = '2cddd9e7f4e354a7d3c9fc141e9d9292'
 
 // generateAuthQuery :: () -> Object
