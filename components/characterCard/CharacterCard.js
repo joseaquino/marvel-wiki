@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 
-import './InfoCard.scss'
+import './CharacterCard.scss'
 
 const InfoCard = ({ id, name, thumbnail }) => (
 	<Link href={`/character/${id}`}>

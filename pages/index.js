@@ -1,7 +1,7 @@
 import Head from 'next/head'
 
 import { getCharactersList } from '../services/characters'
-import InfoCard from '../components/infoCard'
+import CharacterCard from '../components/characterCard'
 
 const CharactersPage = ({ characters }) => {
 	return (
@@ -13,7 +13,8 @@ const CharactersPage = ({ characters }) => {
 				<div className="info-cards">
 					{
 						characters.map(({ id, name, thumbnail }) => (
-							<InfoCard
+							<CharacterCard
+								key={id}
 								id={id}
 								name={name}
 								thumbnail={thumbnail}
