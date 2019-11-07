@@ -4,7 +4,7 @@ import Link from 'next/link'
 import './ComicCard.scss'
 
 const ComicCard = ({ id, title, thumbnail, issueNumber }) => (
-	<Link href={`/comic/${id}`}>
+	<Link href="/comic/[comicID]" as={`/comic/${id}`} prefetch={false}>
 		<a className="comic-card">
 			<div className="comic-portrait-frame">
 				<div

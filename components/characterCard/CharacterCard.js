@@ -4,7 +4,7 @@ import Link from 'next/link'
 import './CharacterCard.scss'
 
 const InfoCard = ({ id, name, thumbnail }) => (
-	<Link href={`/character/${id}`}>
+	<Link href="/character/[characterID]" as={`/character/${id}`} prefetch={false}>
 		<a className="info-card">
 			<div className="card-image">
 				<span

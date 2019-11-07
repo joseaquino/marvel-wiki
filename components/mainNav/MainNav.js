@@ -13,17 +13,17 @@ const MainNav = () => {
 	return (
 		<div className="nav-container">
 			<nav>
-				<Link href="/">
+				<Link href="/" as="/" prefetch={false}>
 					<a className={pathname === '/' ? 'active' : ''} id="characters-nav">
 						Characters
 					</a>
 				</Link>
-				<Link href="/comics">
+				<Link href="/comics" as="/comics" prefetch={false}>
 					<a className={pathname === '/comics' ? 'active' : ''} id="comics-nav">
 						Comics
 					</a>
 				</Link>
-				<Link href="/bookmarks">
+				<Link href="/bookmarks" as="/bookmarks" prefetch={false}>
 					<a className={pathname === '/bookmarks' ? 'active' : ''} id="bookmarks-nav">
 						Bookmarks
 					</a>
