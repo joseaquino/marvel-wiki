@@ -32,7 +32,7 @@ const ComicDetailPage = ({ comic }) => {
 					<h2>Stories</h2>
 					<ul>
 						{
-							comic.stories.map(story => <li><a>{ story }</a></li>)
+							comic.stories.map((story, idx) => <li key={idx}><a>{ story }</a></li>)
 						}
 					</ul>
 				</div>
