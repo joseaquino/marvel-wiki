@@ -3,11 +3,13 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 
 import CharactersFilters from '../filters/CharacterFilters'
+import ComicsFilters from '../filters/ComicsFilters'
 
 import './MainNav.scss'
 
 const filters = {
 	'/': CharactersFilters,
+	'/comics': ComicsFilters
 }
 
 const MainNav = () => {
