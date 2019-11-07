@@ -4,13 +4,16 @@ import { useRouter } from 'next/router'
 import Head from 'next/head'
 
 import { getCharactersList, getNextCharactersPage } from '../services/characters'
+import useDidUpdate from '../services/useDidUpdateHook'
 import CharacterCard from '../components/characterCard'
-import LoadMoreBtn from '../components/loadMoreBtn'
+import LoadMoreBtn from '../components/buttons/loadMoreBtn'
 
-const CharactersPage = ({ characters }) => {
+const CharactersPage = ({ characters, total }) => {
 	const router = useRouter()
 	const [charactersState, setCharactersState] = useState(characters)
 	const currentPage = useRef(1)
+
+	useDidUpdate(() => setCharactersState(characters), [characters])
 
 	const loadNextCharactersPage = () =>
 		getNextCharactersPage({
