@@ -150,8 +150,10 @@ img {
 		.detail-characters {
 			display: grid;
 			grid-template-columns: repeat(4, 1fr);
-			grid-column-gap: 15px;
+			grid-column-gap: 20px;
+			grid-row-gap: 20px;
 			align-items: start;
+			margin-bottom: 30px;
 		}
 
 		li {
@@ -174,6 +176,15 @@ img {
 				border-radius: 6px;
 				background-color: $bright-yellow;
 			}
+		}
+
+		.no-value {
+			background-color: $cream-600;
+			padding: 24px 24px;
+			border-radius: 6px;
+			display: block;
+			font-size: 1.5rem;
+			margin-bottom: 30px;
 		}
 	}
 }
