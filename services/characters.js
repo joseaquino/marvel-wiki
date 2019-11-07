@@ -38,6 +38,45 @@ export const getCharactersList = async query => {
 	return { characters, total: data.data ? data.data.total : Infinity }
 }
 
+export const getCharacter = async id => {
+	const response = await marvelRequest(`/characters/${id}`, {})
+	const character = await response.json()
+
+	const characterDetails = {
+		stories: [],
+	}
+
+	const results = character.data && character.data.results[0] ? character.data.results[0] : null
+
+	if (results) {
+		characterDetails.id = results.id
+		characterDetails.name = results.name
+		characterDetails.description = results.description
+		characterDetails.stories = results.stories.items.map(story => story.name)
+		characterDetails.thumbnail = `${results.thumbnail.path}.${results.thumbnail.extension}`
+	}
+
+	return characterDetails
+}
+
+export const getCharacterComics = id => {
+	return marvelRequest(`/characters/${id}/comics`, {})
+		.then(response => response.json())
+		.then(comics => comics.data && comics.data.results ? comics.data.results : null)
+		.then(results => {
+			let comicDetails = []
+
+			if (results)
+				comicDetails = results.map(result => ({
+					id: result.id,
+					title: result.title,
+					thumbnail: result.thumbnail
+				}))
+
+			return comicDetails
+		})
+}
+
 export const getNextCharactersPage = query => {
 	const requestQuery = {
 		limit: PER_PAGE,
