@@ -1,4 +1,6 @@
 import { useRef, useState } from 'react'
+import { useRouter } from 'next/router'
+
 import Head from 'next/head'
 
 import { getCharactersList, getNextCharactersPage } from '../services/characters'
@@ -6,11 +8,15 @@ import CharacterCard from '../components/characterCard'
 import LoadMoreBtn from '../components/loadMoreBtn'
 
 const CharactersPage = ({ characters }) => {
+	const router = useRouter()
 	const [charactersState, setCharactersState] = useState(characters)
 	const currentPage = useRef(1)
 
 	const loadNextCharactersPage = () =>
-		getNextCharactersPage(currentPage.current)
+		getNextCharactersPage({
+			currentPage: currentPage.current,
+			...router.query
+		})
 			.then(newCharacters =>
 				setCharactersState(charactersState.concat(newCharacters))
 			)
