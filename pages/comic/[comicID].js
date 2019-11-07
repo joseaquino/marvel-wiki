@@ -3,10 +3,12 @@ import { useEffect, useState } from 'react'
 import ItemDetailNav from '../../components/itemDetailNav'
 import CharacterCard from '../../components/characterCard'
 import { getComic, getComicCharacters } from '../../services/comics'
+import { addComicToBookmarks, isComicBookmarked, removeComicBookmark } from '../../services/bookmarks'
 
 const ComicDetailPage = ({ comic }) => {
 	const [characters, setCharacters] = useState([])
 	const [charactersLoaded, setCharactersLoaded] = useState(false)
+	const [isBookmarked, setIsBookmarked] = useState(isComicBookmarked(comic.id))
 
 	useEffect(() => {
 		getComicCharacters(comic.id)
@@ -14,13 +16,24 @@ const ComicDetailPage = ({ comic }) => {
 			.then(() => setCharactersLoaded(true))
 	}, [])
 
+	const toggleBookmark = () => {
+		if (isBookmarked) {
+			removeComicBookmark(comic)
+		} else {
+			addComicToBookmarks(comic)
+		}
+
+		setIsBookmarked(!isBookmarked)
+	}
+
 	return (
 		<div className="main-container detail-page">
 			<ItemDetailNav
 				backUrl="/comics"
-				onBookmark={() => console.log(comic)}
+				onBookmark={toggleBookmark}
 				text="Back to Comics"
 				width="215px"
+				isBookmarked={isBookmarked}
 			/>
 			<div className="detail-contents">
 				<div className="detail-image comic-ratio">

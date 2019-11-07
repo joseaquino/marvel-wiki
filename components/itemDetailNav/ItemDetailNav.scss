@@ -22,5 +22,10 @@
 				fill: $gray-100;
 			}
 		}
+
+		&.bookmarked svg path {
+			stroke: $thanos-purple-500;
+			fill: $marvel-red;
+		}
 	}
 }

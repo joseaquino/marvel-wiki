@@ -7,7 +7,7 @@ import BookmarkIcon from '../icons/Bookmark'
 
 import './ItemDetailNav.scss'
 
-const ItemDetailNav = ({ backUrl, onBookmark, text, width }) => {
+const ItemDetailNav = ({ backUrl, onBookmark, text, width, isBookmarked }) => {
 	const changeRoute = () => Router.push(backUrl)
 
 	return (
@@ -19,7 +19,7 @@ const ItemDetailNav = ({ backUrl, onBookmark, text, width }) => {
 				action={changeRoute}
 			/>
 
-			<button type="button" onClick={onBookmark}>
+			<button type="button" onClick={onBookmark} className={isBookmarked ? "bookmarked" : ""}>
 				<BookmarkIcon />
 			</button>
 		</div>
