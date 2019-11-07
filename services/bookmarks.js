@@ -24,7 +24,8 @@ const isBookmarked = type => id => {
 		bookmarks[type]
 		? bookmarks[type].reduce(
 			(hasMatchFound, bookmark) =>
-			!hasMatchFound && bookmark.id === id, false
+				hasMatchFound || bookmark.id === id,
+			false
 		)
 		: false
 	)
