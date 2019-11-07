@@ -1,0 +1,107 @@
+@import 'variables/colors';
+
+.filter-box-container {
+	position: relative;
+	display: inline-block;
+	padding-bottom: 24px;
+
+	.filter-box {
+		position: absolute;
+		top: 100%; left: 0;
+		z-index: -1;
+		background-color: $thanos-purple-400;
+		border: 3px solid  $marvel-red;
+		box-sizing: border-box;
+		width: 360px;
+		border-radius: 12px;
+		transform: translate(0, 36px);
+		opacity: 0;
+		transition: transform 0.4s ease, opacity 0.4s ease;
+
+		&-open {
+			z-index: 50;
+			transform: translate(0, 0);
+			opacity: 1;
+		}
+
+		&:before {
+			content: '';
+			width: 24px;
+			height: 24px;
+			border-radius: 3px;
+			background-color: $marvel-red;
+			position: absolute;
+			top: -14px; left: 60px;
+			transform: rotate(45deg);
+			z-index: -1;
+		}
+
+		.filter-box-tabs {
+			display: grid;
+			grid-template-columns: 1fr 1fr 1fr;
+			border-bottom: 3px solid $marvel-red;
+			border-radius: 6px 6px 0 0;
+			overflow: hidden;
+
+			button {
+				background-color: $thanos-purple-600;
+				color: white;
+				font-weight: bold;
+				text-align: center;
+				font-size: 1.5rem;
+				line-height: 3.5rem;
+				vertical-align: middle;
+				border: none;
+				border-left: 1px solid $marvel-red;
+				border-right: 1px solid $marvel-red;
+
+				&:first-child {
+					border-left: none;
+				}
+
+				&:last-child {
+					border-right: none;
+				}
+
+				&:hover {
+					cursor: pointer;
+				}
+
+				&.active {
+					background: $marvel-red;
+				}
+			}
+		}
+
+		form {
+			padding: 18px;
+
+			input {
+				width: 100%;
+				border-radius: 6px;
+				font-size: 1.5rem;
+				box-sizing: border-box;
+				border: none;
+
+				&[type="text"] {
+					margin-bottom: 24px;
+					height: 36px;
+					padding: 6px;
+					background-color: $gray-100;
+				}
+
+				&[type="submit"] {
+					background-color: $marvel-red;
+					text-transform: uppercase;
+					color: white;
+					font-size: 1.8rem;
+					padding: 6px;
+
+					&:hover {
+						cursor: pointer;
+					}
+				}
+			}
+		}
+	}
+}

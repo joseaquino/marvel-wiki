@@ -8,8 +8,26 @@ const pickCharacterData = character => ({
 	thumbnail: character.thumbnail
 })
 
-export const getCharactersList = async () => {
-	const response = await marvelRequest('/characters', {})
+export const getCharactersList = async query => {
+	const requestQuery = {
+		limit: PER_PAGE,
+		orderBy: query.sort === 'up' ? '-name' : 'name'
+	}
+
+	switch(query.filterBy) {
+		case 'name':
+			requestQuery.nameStartsWith = query.searchQuery
+			break
+		case 'comic':
+			requestQuery.comics = query.searchQuery
+			break
+		case 'story':
+			requestQuery.stories = query.searchQuery
+			break
+	}
+
+	const response = await marvelRequest('/characters', requestQuery)
+
 	const data = await response.json()
 	let characters = []
 
@@ -20,11 +38,30 @@ export const getCharactersList = async () => {
 	return characters
 }
 
-export const getNextCharactersPage = pageNumber =>
-	marvelRequest('/characters', { offset: pageNumber * PER_PAGE })
+export const getNextCharactersPage = query => {
+	const requestQuery = {
+		limit: PER_PAGE,
+		offset: query.currentPage ? query.currentPage * PER_PAGE : 0,
+		orderBy: query.sort && query.sort === 'up' ? '-name' : 'name'
+	}
+
+	switch(query.filterBy) {
+		case 'name':
+			requestQuery.nameStartsWith = query.searchQuery
+			break
+		case 'comic':
+			requestQuery.comics = query.searchQuery
+			break
+		case 'story':
+			requestQuery.stories = query.searchQuery
+			break
+	}
+
+	return marvelRequest('/characters', requestQuery)
 		.then(response => response.json())
 		.then(data =>
 			data.data && data.data.results
 			? data.data.results.map(pickCharacterData)
 			: []
 		)
+}

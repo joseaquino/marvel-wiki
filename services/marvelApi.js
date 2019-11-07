@@ -21,8 +21,8 @@ const generateAuthQuery = () => {
 	return authQuery
 }
 
-// queryToString :: Object -> String
-const queryToString = obj => {
+// toQueryString :: Object -> String
+export const toQueryString = obj => {
 	const keys = Object.keys(obj)
 	let queryString = '?'
 
@@ -37,7 +37,7 @@ const queryToString = obj => {
 // requestFromMarvel :: String -> Object -> Promise
 const requestFromMarvel = (path, query) => {
 	query = Object.assign(query, generateAuthQuery())
-	const url = `${ENDPOINT}${path}${queryToString(query)}`
+	const url = `${ENDPOINT}${path}${toQueryString(query)}`
 
 	return fetch(url)
 }

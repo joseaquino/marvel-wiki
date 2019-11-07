@@ -1,8 +1,10 @@
 @import 'variables/colors';
 
 .nav-container {
+	margin: 0 auto;
 	margin-top: 60px;
 	text-align: center;
+	position: relative;
 
 	nav {
 		border: 3px solid $marvel-red;
@@ -57,4 +59,15 @@
 			left: 66.666%;
 		}
 	}
+
+	.page-filters {
+		position: absolute;
+		top: 0;
+		left: 0;
+
+		.filter-container .expandable-btn {
+			margin-right: 12px;
+		}
+	}
 }
+

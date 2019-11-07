@@ -2,13 +2,24 @@ import React from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
+import CharactersFilters from '../filters/CharacterFilters'
+
 import './MainNav.scss'
+
+const filters = {
+	'/': CharactersFilters,
+}
 
 const MainNav = () => {
 	const router = useRouter()
 	const { pathname } = router
 
-	console.log(pathname)
+	const hasFilters = () => filters[pathname] !== undefined
+
+	const Filter = () => 
+		typeof(filters[pathname]) === 'function'
+			? filters[pathname]()
+			: null
 
 	return (
 		<div className="nav-container">
@@ -30,6 +41,11 @@ const MainNav = () => {
 				</Link>
 				<span className="active-indicator" />
 			</nav>
+			{
+				hasFilters()
+					? <div className="page-filters">{ <Filter /> }</div>
+					: null
+			}
 		</div>
 	)
 }

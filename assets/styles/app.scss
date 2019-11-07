@@ -32,31 +32,34 @@ img {
 }
 
 @media only screen  and (min-width: 768px) {
-	.main-container {
+	.main-container,
+	.nav-container {
 		max-width: 768px;
+	}
 
-		.info-cards {
-			grid-template-columns: repeat(3, 1fr);
-		}
+	.main-container .info-cards {
+		grid-template-columns: repeat(3, 1fr);
 	}
 }
 
 @media only screen  and (min-width: 1024px) {
-	.main-container {
+	.main-container,
+	.nav-container {
 		max-width: 1024px;
+	}
 
-		.info-cards {
-			grid-template-columns: repeat(4, 1fr);
-		}
+	.main-container .info-cards {
+		grid-template-columns: repeat(4, 1fr);
 	}
 }
 
 @media only screen  and (min-width: 1500px) {
-	.main-container {
+	.main-container,
+	.nav-container {
 		max-width: 1500px;
+	}
 
-		.info-cards {
-			grid-template-columns: repeat(5, 1fr);
-		}
+	.main-container .info-cards {
+		grid-template-columns: repeat(5, 1fr);
 	}
 }

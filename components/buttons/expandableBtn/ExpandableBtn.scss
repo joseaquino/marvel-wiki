@@ -1,0 +1,52 @@
+@import 'variables/colors';
+
+.expandable-btn {
+	background-color: $thanos-purple-400;
+	border: 3px solid $marvel-red;
+	color: $thanos-purple-300;
+	height: 48px;
+	border-radius: 24px;
+	transition: background-color 0.2s ease, width 0.2s ease-in-out;
+	position: relative;
+	overflow: hidden;
+
+	span {
+		font-size: 1.5rem;
+		font-weight: bold;
+		text-transform: uppercase;
+		position: absolute;
+		left: 48px;
+		width: 300px;
+		text-align: left;
+		top: 12px;
+		display: none;
+	}
+
+	.btn-icon {
+		display: inline-grid;
+		height: 42px;
+		width: 42px;
+		align-items: center;
+		justify-items: center;
+		position: absolute;
+		top: 0; left: 0;
+
+		svg path {
+			fill: $thanos-purple-300;
+		}
+	}
+
+	&:hover, &:focus {
+		cursor: pointer;
+		background-color: $marvel-red;
+		color: white;
+
+		svg path {
+			fill: white;
+		}
+
+		span {
+			display: inline-block;
+		}
+	}
+}
