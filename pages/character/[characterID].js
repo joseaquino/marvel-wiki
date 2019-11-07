@@ -29,7 +29,7 @@ const CharacterDetailPage = ({ character }) => {
 	return (
 		<div className="main-container detail-page">
 			<ItemDetailNav
-				backUrl="/characters"
+				backUrl="/"
 				onBookmark={toggleBookmark}
 				text="Back to Characters"
 				width="250px"
