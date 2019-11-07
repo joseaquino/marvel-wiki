@@ -1,57 +1,21 @@
-import { useRef, useState } from 'react'
-import { useRouter } from 'next/router'
-
 import Head from 'next/head'
 
 import { getCharactersList, getNextCharactersPage } from '../services/characters'
-import useDidUpdate from '../services/useDidUpdateHook'
 import CharacterCard from '../components/characterCard'
-import LoadMoreBtn from '../components/buttons/loadMoreBtn'
+import ContinousLoadingGrid from '../components/layouts/ContinuosLoadingGrid'
 
-const CharactersPage = ({ characters, total }) => {
-	const router = useRouter()
-	const [charactersState, setCharactersState] = useState(characters)
-	const currentPage = useRef(1)
-
-	useDidUpdate(() => setCharactersState(characters), [characters])
-
-	const loadNextCharactersPage = () =>
-		getNextCharactersPage({
-			currentPage: currentPage.current,
-			...router.query
-		})
-			.then(newCharacters =>
-				setCharactersState(charactersState.concat(newCharacters))
-			)
-			.then(() => currentPage.current = currentPage.current + 1)
-
-	return (
-		<>
-			<Head>
-				<title>List of Marvel Chacters</title>
-			</Head>
-			<div className="main-container">
-				<div className="info-cards">
-					{
-						charactersState.map(({ id, name, thumbnail }, idx) => (
-							<CharacterCard
-								key={idx}
-								id={id}
-								name={name}
-								thumbnail={thumbnail}
-							/>
-						))
-					}
-				</div>
-				{
-					charactersState.length < total
-					? <LoadMoreBtn loaderFunc={loadNextCharactersPage} />
-					: null
-				}
-			</div>
-		</>
-	)
-}
+const CharactersPage = ({ characters, total }) =>
+	<>
+		<Head>
+			<title>List of Marvel Chacters</title>
+		</Head>
+		<ContinousLoadingGrid
+			cards={characters}
+			total={total}
+			onLoadMore={getNextCharactersPage}
+			cardItemRender={CharacterCard}
+		/>
+	</>
 
 CharactersPage.getInitialProps = async ({ query }) => {
 	const response = await getCharactersList(query)
