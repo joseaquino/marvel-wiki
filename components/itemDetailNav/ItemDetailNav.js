@@ -7,14 +7,14 @@ import BookmarkIcon from '../icons/Bookmark'
 
 import './ItemDetailNav.scss'
 
-const ItemDetailNav = ({ backUrl, onBookmark }) => {
+const ItemDetailNav = ({ backUrl, onBookmark, text, width }) => {
 	const changeRoute = () => Router.push(backUrl)
 
 	return (
 		<div className="item-detail-nav">
 			<ExpandableBtn
-				hoverWidth="215px"
-				text="Back to Comics"
+				hoverWidth={width}
+				text={text}
 				icon={ArrowLeftIcon}
 				action={changeRoute}
 			/>

@@ -16,7 +16,12 @@ const ComicDetailPage = ({ comic }) => {
 
 	return (
 		<div className="main-container detail-page">
-			<ItemDetailNav backUrl="/comics" onBookmark={() => console.log(comic)} />
+			<ItemDetailNav
+				backUrl="/comics"
+				onBookmark={() => console.log(comic)}
+				text="Back to Comics"
+				width="215px"
+			/>
 			<div className="detail-contents">
 				<div className="detail-image comic-ratio">
 					<span style={{ backgroundImage: `url(${comic.thumbnail})` }}/>
