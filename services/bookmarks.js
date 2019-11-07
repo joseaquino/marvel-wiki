@@ -68,3 +68,11 @@ export const isCharacterBookmarked = isBookmarked('characters')
 export const addCharacterToBookmarks = addToBookmarks('characters')
 
 export const removeCharacterBookmark = removeABookmark('characters')
+
+export const removeMarkedBookmarks = bookmarks => {
+	const comics = bookmarks.comics.filter(bookmark => bookmark.markedForRemoval)
+	const characters = bookmarks.characters.filter(character => character.markedForRemoval)
+
+	comics.map(comic => comic.id).map(removeABookmark('comics'))
+	characters.map(character => character.id).map(removeABookmark('characters'))
+}
