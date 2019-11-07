@@ -35,7 +35,7 @@ export const getCharactersList = async query => {
 		characters = data.data.results.map(pickCharacterData)
 	}
 
-	return characters
+	return { characters, total: data.data ? data.data.total : Infinity }
 }
 
 export const getNextCharactersPage = query => {

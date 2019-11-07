@@ -40,15 +40,19 @@ const CharactersPage = ({ characters }) => {
 						))
 					}
 				</div>
-				<LoadMoreBtn loaderFunc={loadNextCharactersPage} />
+				{
+					charactersState.length < total
+					? <LoadMoreBtn loaderFunc={loadNextCharactersPage} />
+					: null
+				}
 			</div>
 		</>
 	)
 }
 
-CharactersPage.getInitialProps = async () => {
-	const characters = await getCharactersList()
-	return { characters }
+CharactersPage.getInitialProps = async ({ query }) => {
+	const response = await getCharactersList(query)
+	return response
 }
 
 export default CharactersPage
