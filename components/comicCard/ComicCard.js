@@ -9,7 +9,7 @@ const ComicCard = ({ id, title, thumbnail, issueNumber }) => (
 			<div className="comic-portrait-frame">
 				<div
 					className="comic-portrait"
-					style={{ backgroundImage: `url(${thumbnail.path}.${thumbnail.extension})`}}
+					style={{ backgroundImage: `url(${thumbnail})`}}
 				/>
 			</div>
 			<div className="comic-details">

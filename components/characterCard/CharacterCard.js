@@ -8,7 +8,7 @@ const InfoCard = ({ id, name, thumbnail }) => (
 		<a className="info-card">
 			<div className="card-image">
 				<span
-					style={{ backgroundImage: `url(${thumbnail.path}.${thumbnail.extension})`}}
+					style={{ backgroundImage: `url(${thumbnail})`}}
 				/>
 				<svg
 					width="238"

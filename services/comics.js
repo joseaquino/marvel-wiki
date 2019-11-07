@@ -1,12 +1,15 @@
 import marvelRequest from './marvelApi'
+import { pickCharacterValues } from './characters'
 
 const PER_PAGE = 20
 
-const pickComicValues = comic => ({
-			id: comic.id,
-			title: comic.title,
-			thumbnail: comic.thumbnail,
-			issueNumber: comic.issueNumber
+export const pickComicValues = comic => ({
+	id: comic.id,
+	title: comic.title,
+	thumbnail: `${comic.thumbnail.path}.${comic.thumbnail.extension}`,
+	issueNumber: comic.issueNumber,
+	description: comic.description,
+	stories: comic.stories.items.map(story => story.name)
 })
 
 export const getComicsList = async query => {
@@ -43,18 +46,14 @@ export const getComic = async id => {
 	const response = await marvelRequest(`/comics/${id}`, {})
 	const comic = await response.json()
 
-	const comicDetails = {
+	let comicDetails = {
 		stories: [],
 	}
 
 	const results = comic.data && comic.data.results[0] ? comic.data.results[0] : null
 
 	if (results) {
-		comicDetails.id = results.id
-		comicDetails.title = results.title
-		comicDetails.description = results.description
-		comicDetails.stories = results.stories.items.map(story => story.name)
-		comicDetails.thumbnail = `${results.thumbnail.path}.${results.thumbnail.extension}`
+		comicDetails = pickComicValues(results)
 	}
 
 	return comicDetails
@@ -68,11 +67,7 @@ export const getComicCharacters = id => {
 			let charactersDetails = []
 
 			if (results)
-				charactersDetails = results.map(result => ({
-					id: result.id,
-					name: result.name,
-					thumbnail: result.thumbnail
-				}))
+				charactersDetails = results.map(pickCharacterValues)
 
 			return charactersDetails
 		})

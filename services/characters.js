@@ -1,11 +1,14 @@
 import marvelRequest from './marvelApi'
+import { pickComicValues } from './comics'
 
 const PER_PAGE = 20;
 
-const pickCharacterData = character => ({
+export const pickCharacterValues = character => ({
 	id: character.id,
 	name: character.name,
-	thumbnail: character.thumbnail
+	thumbnail: `${character.thumbnail.path}.${character.thumbnail.extension}`,
+	description: character.description,
+	stories: character.stories.items.map(story => story.name),
 })
 
 export const getCharactersList = async query => {
@@ -32,7 +35,7 @@ export const getCharactersList = async query => {
 	let characters = []
 
 	if (data.data && data.data.results) {
-		characters = data.data.results.map(pickCharacterData)
+		characters = data.data.results.map(pickCharacterValues)
 	}
 
 	return { characters, total: data.data ? data.data.total : Infinity }
@@ -42,18 +45,14 @@ export const getCharacter = async id => {
 	const response = await marvelRequest(`/characters/${id}`, {})
 	const character = await response.json()
 
-	const characterDetails = {
+	let characterDetails = {
 		stories: [],
 	}
 
 	const results = character.data && character.data.results[0] ? character.data.results[0] : null
 
 	if (results) {
-		characterDetails.id = results.id
-		characterDetails.name = results.name
-		characterDetails.description = results.description
-		characterDetails.stories = results.stories.items.map(story => story.name)
-		characterDetails.thumbnail = `${results.thumbnail.path}.${results.thumbnail.extension}`
+		characterDetails = pickCharacterValues(results)
 	}
 
 	return characterDetails
@@ -67,11 +66,7 @@ export const getCharacterComics = id => {
 			let comicDetails = []
 
 			if (results)
-				comicDetails = results.map(result => ({
-					id: result.id,
-					title: result.title,
-					thumbnail: result.thumbnail
-				}))
+				comicDetails = results.map(pickComicValues)
 
 			return comicDetails
 		})
@@ -100,7 +95,7 @@ export const getNextCharactersPage = query => {
 		.then(response => response.json())
 		.then(data =>
 			data.data && data.data.results
-			? data.data.results.map(pickCharacterData)
+			? data.data.results.map(pickCharacterValues)
 			: []
 		)
 }
