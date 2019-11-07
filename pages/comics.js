@@ -2,7 +2,7 @@ import { useRef, useState } from 'react'
 import Head from 'next/head'
 
 import ComicCard from '../components/comicCard'
-import LoadMoreBtn from '../components/loadMoreBtn'
+import LoadMoreBtn from '../components/buttons/loadMoreBtn'
 
 import { getComicsList, getNextComicsPage } from '../services/comics'
 
