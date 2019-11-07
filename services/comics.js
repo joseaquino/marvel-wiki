@@ -36,7 +36,7 @@ export const getComicsList = async query => {
 		comics = data.data.results.map(pickComicValues)
 	}
 
-	return comics
+	return { comics, total: data.data ? data.data.total : Infinity }
 }
 
 export const getNextComicsPage = query => {
