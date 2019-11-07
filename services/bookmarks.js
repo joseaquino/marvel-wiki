@@ -1,6 +1,6 @@
 const STORAGE_KEY = 'marvelWikiBookmarks'
 
-const _loaded = false
+let _loaded = false
 
 let _bookmarks = {
 	comics: [],
@@ -17,7 +17,7 @@ export const getBookmarks = () => {
 	return _bookmarks
 }
 
-const isBookmarked = (type, id) => {
+const isBookmarked = type => id => {
 	const bookmarks = getBookmarks()
 
 	return (
@@ -30,6 +30,25 @@ const isBookmarked = (type, id) => {
 	)
 }
 
+const addToBookmarks = type => value => {
+	if (!isBookmarked(type)(value.id)) {
+		let bookmarks = getBookmarks()
+		saveBookmarks({
+			...bookmarks,
+			[type]: bookmarks[type].concat(value)
+		})
+	}
+}
+
+
+const removeABookmark = type => id => {
+	const bookmarks = getBookmarks()
+	saveBookmarks({
+		...bookmarks,
+		[type]: bookmarks[type].filter(mark => mark.id !== id)
+	})
+}
+
 const saveBookmarks = bookmarks => {
 	if (process.browser) {
 		localStorage.setItem(STORAGE_KEY, JSON.stringify(bookmarks))
@@ -37,22 +56,14 @@ const saveBookmarks = bookmarks => {
 	_bookmarks = bookmarks
 }
 
-export const isComicBookmarked = id => isBookmarked('comics', id)
+export const isComicBookmarked = isBookmarked('comics')
 
-export const addComicToBookmarks = comic => {
-	if (!isComicBookmarked(comic.id)) {
-		let bookmarks = getBookmarks()
-		saveBookmarks({
-			...bookmarks,
-			comics: bookmarks.comics.concat(comic)
-		})
-	}
-}
+export const addComicToBookmarks = addToBookmarks('comics')
 
-export const removeComicBookmark = id => {
-	const bookmarks = getBookmarks()
-	saveBookmarks({
-		...bookmarks,
-		comics: bookmarks.comics.filter(comic => comic.id !== id)
-	})
-}
+export const removeComicBookmark = removeABookmark('comics')
+
+export const isCharacterBookmarked = isBookmarked('characters')
+
+export const addCharacterToBookmarks = addToBookmarks('characters')
+
+export const removeCharacterBookmark = removeABookmark('characters')
