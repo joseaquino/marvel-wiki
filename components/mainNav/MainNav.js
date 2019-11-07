@@ -16,6 +16,9 @@ const MainNav = () => {
 	const router = useRouter()
 	const { pathname } = router
 
+	const isNavVisible = () =>
+		pathname === '/' || pathname === '/comics' || pathname === '/bookmarks'
+
 	const hasFilters = () => filters[pathname] !== undefined
 
 	const Filter = () => 
@@ -24,31 +27,33 @@ const MainNav = () => {
 			: null
 
 	return (
-		<div className="nav-container">
-			<nav>
-				<Link href="/" as="/" prefetch={false}>
-					<a className={pathname === '/' ? 'active' : ''} id="characters-nav">
-						Characters
-					</a>
-				</Link>
-				<Link href="/comics" as="/comics" prefetch={false}>
-					<a className={pathname === '/comics' ? 'active' : ''} id="comics-nav">
-						Comics
-					</a>
-				</Link>
-				<Link href="/bookmarks" as="/bookmarks" prefetch={false}>
-					<a className={pathname === '/bookmarks' ? 'active' : ''} id="bookmarks-nav">
-						Bookmarks
-					</a>
-				</Link>
-				<span className="active-indicator" />
-			</nav>
-			{
-				hasFilters()
-					? <div className="page-filters">{ <Filter /> }</div>
-					: null
-			}
-		</div>
+		isNavVisible()
+		?  <div className="nav-container">
+				<nav>
+					<Link href="/" as="/" prefetch={false}>
+						<a className={pathname === '/' ? 'active' : ''} id="characters-nav">
+							Characters
+						</a>
+					</Link>
+					<Link href="/comics" as="/comics" prefetch={false}>
+						<a className={pathname === '/comics' ? 'active' : ''} id="comics-nav">
+							Comics
+						</a>
+					</Link>
+					<Link href="/bookmarks" as="/bookmarks" prefetch={false}>
+						<a className={pathname === '/bookmarks' ? 'active' : ''} id="bookmarks-nav">
+							Bookmarks
+						</a>
+					</Link>
+					<span className="active-indicator" />
+				</nav>
+				{
+					hasFilters()
+						? <div className="page-filters">{ <Filter /> }</div>
+						: null
+				}
+			</div>
+		: null
 	)
 }
 

@@ -1,0 +1,26 @@
+@import 'variables/colors';
+
+.item-detail-nav {
+	margin-bottom: 24px;
+
+	button:last-child {
+		float: right;
+		background: none;
+		border: none;
+		padding: 0;
+
+		&:hover {
+			cursor: pointer;
+		}
+
+		svg {
+			width: 48px;
+			height: 48px;
+
+			path {
+				stroke: $thanos-purple-400;
+				fill: $gray-100;
+			}
+		}
+	}
+}
