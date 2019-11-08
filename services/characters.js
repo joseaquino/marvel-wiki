@@ -1,4 +1,4 @@
-import marvelRequest from './marvelApi'
+import marvelRequest, { urlHttpToHttps } from './marvelApi'
 import { pickComicValues } from './comics'
 
 const PER_PAGE = 20;
@@ -6,7 +6,7 @@ const PER_PAGE = 20;
 export const pickCharacterValues = character => ({
 	id: character.id,
 	name: character.name,
-	thumbnail: `${character.thumbnail.path}.${character.thumbnail.extension}`,
+	thumbnail: `${urlHttpToHttps(character.thumbnail.path)}.${character.thumbnail.extension}`,
 	description: character.description,
 	stories: character.stories.items.map(story => story.name),
 })

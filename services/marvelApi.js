@@ -21,6 +21,9 @@ const generateAuthQuery = () => {
 	return authQuery
 }
 
+// urlHttpToHttps :: String -> String
+export const urlHttpToHttps = url => url.replace(/^http:\/\//i, 'https://')
+
 // toQueryString :: Object -> String
 export const toQueryString = obj => {
 	const keys = Object.keys(obj)
