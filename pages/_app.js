@@ -20,6 +20,7 @@ class MyApp extends App {
 		return (
 			<>
 				<Head>
+					<link rel='manifest' href='/static/manifest.json' />
 					<link rel="Marvel Wiki fav icon" type="image/x-icon" href="/static/favicon.ico"/>
 					<link href="https://fonts.googleapis.com/css?family=PT+Sans:400,700&display=swap" rel="stylesheet" />
 				</Head>
