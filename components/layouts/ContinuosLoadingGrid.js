@@ -27,7 +27,7 @@ const ContinousLoadingGrid = ({ cards, total, onLoadMore, cardItemRender }) => {
 		onLoadMore(getQuery()).then(concatNewCards).then(increasePageNum)
 
 	return (
-		<div className="main-container">
+		<div className="main-container" role="main">
 			<div className="info-cards">
 				{
 					cardsState.map((cardProps, idx) => <CardItem key={idx} {...cardProps} />)

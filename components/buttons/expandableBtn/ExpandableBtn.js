@@ -26,6 +26,7 @@ const ExpandableBtn = ({ hoverWidth, text, icon, action, keepOpen }) => {
 			onBlur={contractButton}
 			onMouseLeave={contractButton}
 			style={{ width }}
+			aria-label="text"
 		>
 			<div className="btn-icon"><Icon /></div>
 			<span>{text}</span>

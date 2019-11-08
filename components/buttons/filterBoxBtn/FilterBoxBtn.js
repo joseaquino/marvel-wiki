@@ -81,6 +81,7 @@ const FilterBoxBtn = ({ tabs, isOpen, onBtnClick }) => {
 				</div>
 				<form onSubmit={handleFilterSubmit}>
 					<input
+						label={`Search by ${activeTab.text}`}
 						type="text"
 						value={activeTab.value ? activeTab.value : ''}
 						onChange={updateTabValue}

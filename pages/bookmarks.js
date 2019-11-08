@@ -65,7 +65,7 @@ const BookmarksPage = () => {
 			<Head>
 				<title>Bookmarked comics and characaters from the Marvel collection.</title>
 			</Head>
-			<div className="main-container bookmarks">
+			<div className="main-container bookmarks" role="main">
 				<div className="bookmarks-side-nav">
 					<button
 						type="button"
