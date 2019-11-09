@@ -8,9 +8,11 @@ USER node
 
 COPY --chown=node:node . .
 
-RUN yarn && yarn build
+#RUN yarn && yarn build
 
-ENV MARVEL_PRIVATE_KEY=ENTER_YOU_PRIVATE_KEY
+RUN if [ "$NODE_ENV" = "production" ]; \
+		then yarn && yarn build; \
+		fi
 
 EXPOSE 3000
 
