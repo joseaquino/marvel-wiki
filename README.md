@@ -28,7 +28,7 @@ and improve the performace delivery of it.
    -  Also there is a dot at the end of the command that is easy to miss.
 5. Run the Docker image with the next command:
     ```shell
-    docker run --name marvel-wiki --rm -p 3000:3000 -d marvel-wiki:v1
+    docker run --name marvel-wiki --rm -p 3000:3000 -d marvel-wiki-app:v1
     ```
     Notes:
     - `--name` assigns the given name to the docker image
