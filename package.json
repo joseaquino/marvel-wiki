@@ -13,6 +13,7 @@
     "isomorphic-unfetch": "^3.0.0",
     "next": "latest",
     "next-compose-plugins": "^2.2.0",
+    "next-offline": "^4.0.6",
     "next-optimized-images": "^2.5.4",
     "node-sass": "^4.13.0",
     "nprogress": "^0.2.0",
@@ -22,5 +23,6 @@
   },
   "license": "MIT",
   "keywords": [],
-  "description": "A Marvel universe of characters, comics and stories navigator."
+  "description": "A Marvel universe of characters, comics and stories navigator.",
+  "devDependencies": {}
 }
