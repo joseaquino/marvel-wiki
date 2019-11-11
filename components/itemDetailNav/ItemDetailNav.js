@@ -2,16 +2,14 @@ import React from 'react'
 import Router from 'next/router'
 
 import ExpandableBtn from '../buttons/expandableBtn'
+import BookmarkBtn from '../buttons/bookmarkBtn'
 import ArrowLeftIcon from '../icons/ArrowLeft'
-import BookmarkIcon from '../icons/Bookmark'
 
-import './ItemDetailNav.scss'
-
-const ItemDetailNav = ({ backUrl, onBookmark, text, width, isBookmarked }) => {
+const ItemDetailNav = ({ backUrl, onBookmark, text, width, isBookmarked, bookmarkLabel }) => {
 	const changeRoute = () => Router.push(backUrl)
 
 	return (
-		<div className="item-detail-nav">
+		<div style={{ marginBottom: '24px' }}>
 			<ExpandableBtn
 				hoverWidth={width}
 				text={text}
@@ -19,9 +17,13 @@ const ItemDetailNav = ({ backUrl, onBookmark, text, width, isBookmarked }) => {
 				action={changeRoute}
 			/>
 
-			<button type="button" onClick={onBookmark} className={isBookmarked ? "bookmarked" : ""}>
-				<BookmarkIcon />
-			</button>
+			<span style={{ float: "right" }}>
+				<BookmarkBtn
+					isBookmarked={isBookmarked}
+					onBookmark={onBookmark}
+					label={bookmarkLabel}
+				/>
+			</span>
 		</div>
 	)
 }

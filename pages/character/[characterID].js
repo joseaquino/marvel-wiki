@@ -37,6 +37,7 @@ const CharacterDetailPage = ({ character }) => {
 					text="Back to Characters"
 					width="250px"
 					isBookmarked={isBookmarked}
+					bookmarkLabel={`Add character ${character.name} to the bookmarks`}
 				/>
 				<div className="detail-contents">
 					<div className="detail-image character-ratio">

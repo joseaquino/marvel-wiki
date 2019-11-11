@@ -1,73 +1,92 @@
 @import 'variables/colors';
 
 .comic-card {
-	text-decoration: none;
-	color: white;
 	position: relative;
+	display: inline-grid;
+	overflow: hidden;
 
 	&:hover .comic-portrait-frame {
 		transform: scale(0.826271186441);
 	}
 
-	.comic-portrait-frame {
-		border-radius: 15px;
-		background-color: $bright-yellow;
-		padding: 1px 1px 10px 10px;
-		transform-origin: top left;
-		transition: transform 0.2s ease;
+	a {
+		text-decoration: none;
+		color: white;
 		position: relative;
-		z-index: 1;
+		display: block;
 
-		.comic-portrait {
-			height: 0;
-			overflow: hidden;
-			width: 100%;
-			padding-top: 147.457627119%;
-			background-size: cover;
+		.comic-portrait-frame {
+			border-radius: 15px;
+			background-color: $bright-yellow;
+			padding: 1px 1px 10px 10px;
+			transform-origin: top left;
+			transition: transform 0.2s ease;
+			position: relative;
+			z-index: 1;
+
+			.comic-portrait {
+				height: 0;
+				overflow: hidden;
+				width: 100%;
+				padding-top: 147.457627119%;
+				background-size: cover;
+				border-radius: 12px;
+				box-shadow: -4px 4px 4px rgba(0, 0, 0, 0.35);
+			}
+		}
+
+		.comic-details {
+			position: absolute;
+			left: 20px;
+			top: 24px;
+			right: 0px;
+			bottom: 0px;
+			background: linear-gradient(180deg, #896DD9 0%, #5C33D1 100%);
 			border-radius: 12px;
-			box-shadow: -4px 4px 4px rgba(0, 0, 0, 0.35);
+
+			p {
+				position: absolute;
+				bottom: 0;
+				left: 0;
+				font-size: 1.8rem;
+				margin: 12px 15px;
+				font-weight: bold;
+				max-height: 5.4rem;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				-webkit-line-clamp: 3;
+				-webkit-box-orient: vertical;
+				display: block;
+				display: -webkit-box;
+			}
+
+			span {
+				transform: rotate(-90deg);
+				display: inline-block;
+				text-transform: uppercase;
+				position: absolute;
+				top: 24px;
+				right: 4.2rem;
+				transform-origin: top right;
+				font-size: 2.4rem;
+				color: #250F41;
+				line-height: 4.2rem;
+				vertical-align: middle;
+				left: -12px;
+				font-weight: bold;
+			}
 		}
 	}
 
-	.comic-details {
+	.bookmarker {
 		position: absolute;
-		left: 20px;
-		top: 24px;
-		right: 0px;
-		bottom: 0px;
-		background: linear-gradient(180deg, #896DD9 0%, #5C33D1 100%);
-		border-radius: 12px;
+		top: -6px; left: 1rem;
+		transform: translate(0, -46px);
+		transition: transform 0.3s ease;
+		z-index: 10;
+	}
 
-		p {
-			position: absolute;
-			bottom: 0;
-			left: 0;
-			font-size: 1.8rem;
-			margin: 12px 15px;
-			font-weight: bold;
-			max-height: 5.4rem;
-			overflow: hidden;
-			text-overflow: ellipsis;
-			-webkit-line-clamp: 3;
-			-webkit-box-orient: vertical;
-			display: block;
-			display: -webkit-box;
-		}
-
-		span {
-			transform: rotate(-90deg);
-			display: inline-block;
-			text-transform: uppercase;
-			position: absolute;
-			top: 24px;
-			right: 4.2rem;
-			transform-origin: top right;
-			font-size: 2.4rem;
-			color: #250F41;
-			line-height: 4.2rem;
-			vertical-align: middle;
-			left: -12px;
-			font-weight: bold;
-		}
+	&:hover .bookmarker {
+		transform: translate(0, 0);
 	}
 }
