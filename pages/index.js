@@ -7,7 +7,7 @@ import ContinousLoadingGrid from '../components/layouts/ContinuosLoadingGrid'
 const CharactersPage = ({ characters, total }) =>
 	<>
 		<Head>
-			<title>List of Marvel Chacters</title>
+			<title>List of Marvel Characters</title>
 		</Head>
 		<ContinousLoadingGrid
 			cards={characters}
