@@ -36,7 +36,7 @@
 		}
 	}
 
-	&:hover, &:focus {
+	&:hover, &:focus, &.keep-open {
 		cursor: pointer;
 		background-color: $marvel-red;
 		color: white;

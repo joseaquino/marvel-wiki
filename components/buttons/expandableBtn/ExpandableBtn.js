@@ -18,7 +18,7 @@ const ExpandableBtn = ({ hoverWidth, text, icon, action, keepOpen }) => {
 
 	return (
 		<button
-			className="expandable-btn"
+			className={ keepOpen ? "keep-open expandable-btn" : "expandable-btn" }
 			type="button"
 			onClick={callAction}
 			onMouseEnter={expandButton}
