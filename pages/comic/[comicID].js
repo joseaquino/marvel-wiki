@@ -37,6 +37,7 @@ const ComicDetailPage = ({ comic }) => {
 					text="Back to Comics"
 					width="215px"
 					isBookmarked={isBookmarked}
+					bookmarkLabel={`Add comic ${comic.title} to the bookmarks`}
 				/>
 				<div className="detail-contents">
 					<div className="detail-image comic-ratio">

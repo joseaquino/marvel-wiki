@@ -1,47 +1,66 @@
 @import 'variables/colors';
 
-.info-card {
-	text-decoration: none;
-	color: $thanos-purple-500;
-	border-radius: 12px;
+.character-card {
+	position: relative;
+	display: inline-grid;
 	overflow: hidden;
 
-	.card-image {
-		position: relative;
+	a {
+		text-decoration: none;
+		color: $thanos-purple-500;
+		border-radius: 12px;
 		overflow: hidden;
+		display: block;
 
-		&:hover span {
-			transform: scale(1.2);
-		}
 
-		span {
-			width: 100%;
-			height: 0;
-			padding-top: 82.3529411765%;
+		.card-image {
+			position: relative;
 			overflow: hidden;
-			background-color: $thanos-purple-500;
-			background-size: cover;
-			display: block;
-			transition: transform 0.2s ease;
+
+			&:hover span {
+				transform: scale(1.2);
+			}
+
+			span {
+				width: 100%;
+				height: 0;
+				padding-top: 82.3529411765%;
+				overflow: hidden;
+				background-color: $thanos-purple-500;
+				background-size: cover;
+				display: block;
+				transition: transform 0.2s ease;
+			}
+
+			svg {
+				position: absolute;
+				bottom: 0;
+				width: 100%;
+				height: auto;
+			}
 		}
 
-		svg {
-			position: absolute;
-			bottom: 0;
-			width: 100%;
-			height: auto;
+		p {
+			font-size: 2.4rem;
+			font-weight: bold;
+			background-color: $bright-yellow;
+			line-height: 3.6rem;
+			vertical-align: middle;
+			padding: 0 18px 12px;
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
 		}
 	}
 
-	p {
-		font-size: 2.4rem;
-		font-weight: bold;
-		background-color: $bright-yellow;
-		line-height: 3.6rem;
-		vertical-align: middle;
-		padding: 0 18px 12px;
-		white-space: nowrap;
-		overflow: hidden;
-		text-overflow: ellipsis;
+	.bookmarker {
+		position: absolute;
+		top: -6px; left: 1rem;
+		transform: translate(0, -46px);
+		transition: transform 0.3s ease;
+	}
+
+	&:hover .bookmarker {
+		transform: translate(0, 0);
 	}
 }
