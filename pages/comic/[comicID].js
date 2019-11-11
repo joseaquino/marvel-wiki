@@ -4,26 +4,33 @@ import { useEffect, useState } from 'react'
 import ItemDetailNav from '../../components/itemDetailNav'
 import CharacterCard from '../../components/characterCard'
 import { getComic, getComicCharacters } from '../../services/comics'
-import { addComicToBookmarks, isComicBookmarked, removeComicBookmark } from '../../services/bookmarks'
+import { toggleComicBookmark, isComicBookmarked } from '../../services/bookmarks'
 
 const ComicDetailPage = ({ comic }) => {
 	const [characters, setCharacters] = useState([])
 	const [charactersLoaded, setCharactersLoaded] = useState(false)
-	const [isBookmarked, setIsBookmarked] = useState(isComicBookmarked(comic.id))
+	const [isBookmarked, setIsBookmarked] = useState(false)
 
 	useEffect(() => {
+		// Since the component also renders on the server where there is no
+		// Local Storage, we need to delay the bookmark state until the component mounts
+		const checkIfBookmarked = isComicBookmarked(comic.id)
+		if (isBookmarked !== checkIfBookmarked) {
+			setIsBookmarked(checkIfBookmarked)
+		}
+
+		// Load the associated characters when component loads to not
+		// extend more the response of the page as this content is secondary
+		// and only needs to be loaded when mount
 		getComicCharacters(comic.id)
 			.then(setCharacters)
 			.then(() => setCharactersLoaded(true))
 	}, [])
 
+	// Toggles the bookmark state of the loaded comic and triggers
+	// the removal of it from the Local Storage
 	const toggleBookmark = () => {
-		if (isBookmarked) {
-			removeComicBookmark(comic)
-		} else {
-			addComicToBookmarks(comic)
-		}
-
+		toggleComicBookmark(comic)
 		setIsBookmarked(!isBookmarked)
 	}
 
