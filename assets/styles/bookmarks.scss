@@ -80,6 +80,9 @@
 			.item-contents {
 				position: relative;
 				background-color: white;
+				text-decoration: none;
+				color: $thanos-purple-600;
+				display: inline-grid;
 			}
 
 			.item-image {
