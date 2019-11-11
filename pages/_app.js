@@ -20,7 +20,9 @@ class MyApp extends App {
 		return (
 			<>
 				<Head>
+					<meta name="theme-color" content="#ED1D24"/>
 					<link rel='manifest' href='/static/manifest.json' />
+					<link rel="apple-touch-icon" href="/static/marvel-wiki-icon-192.png" />
 					<link rel="Marvel Wiki fav icon" type="image/x-icon" href="/static/favicon.ico"/>
 					<link href="https://fonts.googleapis.com/css?family=PT+Sans:400,700&display=swap" rel="stylesheet" />
 				</Head>
