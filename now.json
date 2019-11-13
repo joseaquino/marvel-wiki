@@ -8,7 +8,7 @@
 			"src": "^/service-worker.js$",	
 			"dest": "/_next/static/service-worker.js",
 			"headers": {
-				"cache-control": "public, max-age=43200, immutable",
+				"cache-control": "public, max-age=0",
 				"Service-Worker-Allowed": "/"
 			}
 		}
