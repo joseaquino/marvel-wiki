@@ -26,9 +26,10 @@ import {
 
 import './FilterBoxBtn.scss'
 
-const FilterBoxBtn = ({ tabs, isOpen, onBtnClick }) => {
+const FilterBoxBtn = ({ tabs, isOpen }) => {
 	const router = useRouter()
 	const tabList = useRef(tabs)
+	const [isBoxOpen, setIsBoxOpen] = useState(isOpen)
 	const [formError, setFormError] = useState('')
 	const [activeTab, setActiveTab] = useState(initState(tabs, router.query))
 
@@ -76,48 +77,51 @@ const FilterBoxBtn = ({ tabs, isOpen, onBtnClick }) => {
 				hoverWidth="154px"
 				text="Filter by:"
 				icon={FilterIcon}
-				action={onBtnClick}
-				keepOpen={isOpen}
+				action={() => setIsBoxOpen(!isBoxOpen)}
+				keepOpen={isBoxOpen}
 			/>
-			<div className={ isOpen ? "filter-box filter-box-open" : "filter-box" }>
-				<div className="filter-box-tabs">
-					{tabList.current.map(tab =>
-						<button
-							key={tab.queryKey}
-							type="button"
-							onClick={() => updateActivetab(tab)}
-							className={equals(activeTab, tab) ? 'active' : ''}
-						>
-							{tab.label}
-						</button>
-					)}
-				</div>
-				<form onSubmit={handleFilterSubmit}>
-					{activeTab.cata({
-						Text: (label, _, val) =>
-							<input
-								label={`Search by ${label}`}
-								type="text"
-								value={val}
-								onChange={updateTabValue}
-							/>,
-						Dropdown: (label, key, val, opts) =>
-							<select
-								onChange={updateTabValue}
-								defaultValue={val}
+			{isBoxOpen
+				? <div className="filter-box">
+					<div className="filter-box-tabs">
+						{tabList.current.map(tab =>
+							<button
+								key={tab.queryKey}
+								type="button"
+								onClick={() => updateActivetab(tab)}
+								className={equals(activeTab, tab) ? 'active' : ''}
 							>
-								{opts.map((opt, idx) =>
-									<option key={idx} value={opt.value}>
-										{opt.label}
-									</option>
-								)}
-							</select>,
-						Autocomplete: (label, key, val, dataSrc) =>
-							<p>Autocomplete box</p>
-					})}
-					<input type="submit" value="Filter" />
-				</form>
-			</div>
+								{tab.label}
+							</button>
+						)}
+					</div>
+					<form onSubmit={handleFilterSubmit}>
+						{activeTab.cata({
+							Text: (label, _, val) =>
+								<input
+									label={`Search by ${label}`}
+									type="text"
+									value={val}
+									onChange={updateTabValue}
+								/>,
+							Dropdown: (label, key, val, opts) =>
+								<select
+									onChange={updateTabValue}
+									defaultValue={val}
+								>
+									{opts.map((opt, idx) =>
+										<option key={idx} value={opt.value}>
+											{opt.label}
+										</option>
+									)}
+								</select>,
+							Autocomplete: (label, key, val, dataSrc) =>
+								<p>Autocomplete box</p>
+						})}
+						<input type="submit" value="Filter" />
+					</form>
+				</div>
+				: null
+			}
 		</div>
 	)
 }

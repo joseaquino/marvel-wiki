@@ -23,19 +23,11 @@ const tabs = [
 	})
 ]
 
-const CharactersFilters = () => {
-	const [filterBoxOpen, setFilterBoxStatus] = useState(false)
-
-	return (
-		<div className="filter-container">
-			<FilterBoxBtn
-				tabs={tabs}
-				isOpen={filterBoxOpen}
-				onBtnClick={() => setFilterBoxStatus(!filterBoxOpen)}
-			/>
-			<SortingBtn />
-		</div>
-	)
-}
+const CharactersFilters = () => (
+	<div className="filter-container">
+		<FilterBoxBtn tabs={tabs}/>
+		<SortingBtn />
+	</div>
+)
 
 export default CharactersFilters

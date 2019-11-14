@@ -31,19 +31,12 @@ const tabs = [
 	})
 ]
 
-const ComicsFilters = () => {
-	const [filterBoxOpen, setFilterBoxStatus] = useState(false)
+const ComicsFilters = () => (
+	<div className="filter-container">
+		<FilterBoxBtn tabs={tabs}/>
+		<SortingBtn />
+	</div>
+)
 
-	return (
-		<div className="filter-container">
-			<FilterBoxBtn
-				tabs={tabs}
-				isOpen={filterBoxOpen}
-				onBtnClick={() => setFilterBoxStatus(!filterBoxOpen)}
-			/>
-			<SortingBtn />
-		</div>
-	)
-}
 
 export default ComicsFilters
