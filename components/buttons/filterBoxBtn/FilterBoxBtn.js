@@ -122,5 +122,17 @@ const FilterBoxBtn = ({ tabs, isOpen, onBtnClick }) => {
 	)
 }
 
+const invalidTabTypeError = (propFullname, componentName) => (
+	"Invalid prop \`" + propFullname + "\` supplied to \`" + componentName + "\`. " +
+	"This prop expects an instance of \`FilterBoxTab\` type."
+)
+
+FilterBoxBtn.propTypes = {
+	tabs: PropTypes.arrayOf((propVal, key, componentName, location, propFullname) =>
+		FilterBoxTab.is(propVal[key])
+		? null
+		: new Error(invalidTabTypeError(propFullname, componentName))
+	).isRequired
+}
 
 export default FilterBoxBtn
