@@ -1,59 +1,74 @@
+import PropTypes from 'prop-types'
 import React, { useRef, useState } from 'react'
 import Router, { useRouter } from 'next/router'
+import compose from 'crocks/helpers/compose'
+import constant from 'crocks/combinators/constant'
+import either from 'crocks/pointfree/either'
+import equals from 'crocks/pointfree/equals'
+import find from 'crocks/Maybe/find'
+import getPathOr from 'crocks/helpers/getPathOr'
+import getProp from 'crocks/Maybe/getProp'
+import map from 'crocks/pointfree/map'
+import not from 'crocks/logic/not'
+import option from 'crocks/pointfree/option'
+import safe from 'crocks/Maybe/safe'
+import tap from 'crocks/helpers/tap'
+import when from 'crocks/logic/when'
 
 import FilterIcon from '../../icons/FilterIcon'
 import ExpandableBtn from '../expandableBtn'
-
-import { toQueryString } from '../../../services/marvelApi'
+import {
+	FilterBoxTab,
+	initState,
+	makeSearchQuery,
+	buildURL
+} from './FilterBoxBtn.model'
 
 import './FilterBoxBtn.scss'
 
 const FilterBoxBtn = ({ tabs, isOpen, onBtnClick }) => {
 	const router = useRouter()
-	const workingTabs = useRef(tabs)
-	const [activeTab, setActiveTab] = useState(() => {
-		let tabActiveFromQuery = workingTabs.current.reduce(
-			(active, tab) => {
-				if (router.query.filterBy === tab.queryKey) {
-					return {...tab, value: router.query.searchQuery }
-				}
+	const tabList = useRef(tabs)
+	const [formError, setFormError] = useState('')
+	const [activeTab, setActiveTab] = useState(initState(tabs, router.query))
 
-				return active
-			},
-			null
-		)
+	const getTabList = () => tabList.current
 
-		if (tabActiveFromQuery === null && workingTabs.current[0]) {
-			return workingTabs.current[0]
-		} else if (tabActiveFromQuery) {
-			return tabActiveFromQuery
-		} else {
-			return {}
-		}
-	})
+	const setTabList = newTabList => tabList.current = newTabList
 
+	const showFormError = compose(
+		setFormError,
+		constant('You must enter a search query')
+	)
+
+	const updateTabList = compose(
+		setTabList,
+		map(when(equals(activeTab), constant(activeTab))),
+		getTabList
+	)
+
+	const submitSearch = compose(
+		either(showFormError, Router.push),
+		map(buildURL(router)),
+		makeSearchQuery
+	)
+		
 	const handleFilterSubmit = evt => {
 		evt.preventDefault()
-
-		if (activeTab.value && activeTab.value.trim() !== '') { 
-			const query = {
-				...router.query,
-				filterBy: activeTab.queryKey,
-				searchQuery: activeTab.value
-			}
-			const url = `${router.pathname}${toQueryString(query)}`
-			Router.push(url)
-		}
+		submitSearch(activeTab)
 	}
 
-	const updateActivetab = selectedTab => {
-		if (activeTab.queryKey !== selectedTab.queryKey) {
-			workingTabs.current = workingTabs.current.map(tab => tab.queryKey === activeTab.queryKey ? activeTab : tab)
-			setActiveTab(selectedTab)
-		}
-	}
+	const updateActivetab = compose(
+		map(setActiveTab),
+		map(tap(updateTabList)),
+		safe(not(equals(activeTab)))
+	)
 
-	const updateTabValue = evt => setActiveTab({ ...activeTab, value: evt.target.value })
+	const updateTabValue = compose(
+		setActiveTab,
+		val => activeTab.map(constant(val)),
+		getPathOr('', ['target', 'value'])
+	)
 
 	return (
 		<div className="filter-box-container">
@@ -66,31 +81,46 @@ const FilterBoxBtn = ({ tabs, isOpen, onBtnClick }) => {
 			/>
 			<div className={ isOpen ? "filter-box filter-box-open" : "filter-box" }>
 				<div className="filter-box-tabs">
-					{
-						workingTabs.current.map(tab =>
-							<button
-								key={tab.queryKey}
-								type="button"
-								onClick={() => updateActivetab(tab)}
-								className={activeTab.queryKey === tab.queryKey ? 'active' : ''}
-							>
-								{ tab.text }
-							</button>
-						)
-					}
+					{tabList.current.map(tab =>
+						<button
+							key={tab.queryKey}
+							type="button"
+							onClick={() => updateActivetab(tab)}
+							className={equals(activeTab, tab) ? 'active' : ''}
+						>
+							{tab.label}
+						</button>
+					)}
 				</div>
 				<form onSubmit={handleFilterSubmit}>
-					<input
-						label={`Search by ${activeTab.text}`}
-						type="text"
-						value={activeTab.value ? activeTab.value : ''}
-						onChange={updateTabValue}
-					/>
+					{activeTab.cata({
+						Text: (label, _, val) =>
+							<input
+								label={`Search by ${label}`}
+								type="text"
+								value={val}
+								onChange={updateTabValue}
+							/>,
+						Dropdown: (label, key, val, opts) =>
+							<select
+								onChange={updateTabValue}
+								defaultValue={val}
+							>
+								{opts.map((opt, idx) =>
+									<option key={idx} value={opt.value}>
+										{opt.label}
+									</option>
+								)}
+							</select>,
+						Autocomplete: (label, key, val, dataSrc) =>
+							<p>Autocomplete box</p>
+					})}
 					<input type="submit" value="Filter" />
 				</form>
 			</div>
 		</div>
 	)
 }
+
 
 export default FilterBoxBtn
