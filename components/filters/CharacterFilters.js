@@ -1,12 +1,26 @@
 import React, { useState } from 'react'
 
-import FilterBoxBtn from '../buttons/filterBoxBtn'
+import FilterBoxBtn, { FilterBoxTab } from '../buttons/filterBoxBtn'
 import SortingBtn from '../buttons/sortingBtn'
 
 const tabs = [
-	{ queryKey: 'name', text: 'Name' },
-	{ queryKey: 'comic', text: 'Comic' },
-	{ queryKey: 'story', text: 'Story' }
+	FilterBoxTab.Text.from({
+		label: 'Name',
+		queryKey: 'name',
+		value: ''
+	}),
+	FilterBoxTab.Autocomplete.from({
+		label: 'Comic',
+		queryKey: 'comic',
+		value: [],
+		dataSrc: x => console.log('Getting Comic titles') || []
+	}),
+	FilterBoxTab.Autocomplete.from({
+		label: 'Story',
+		queryKey: 'story',
+		value: [],
+		dataSrc: x => console.log('Getting Comic story titles') || []
+	})
 ]
 
 const CharactersFilters = () => {
