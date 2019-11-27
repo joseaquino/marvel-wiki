@@ -8,10 +8,8 @@
     "start": "next start"
   },
   "dependencies": {
-    "@zeit/next-sass": "^1.0.1",
     "crocks": "^0.12.4",
     "daggy": "^1.4.0",
-    "imagemin-svgo": "^7.0.0",
     "isomorphic-unfetch": "^3.0.0",
     "next": "^9.1.6",
     "next-compose-plugins": "^2.2.0",
@@ -19,6 +17,7 @@
     "next-optimized-images": "^2.5.4",
     "node-sass": "^4.13.0",
     "nprogress": "^0.2.0",
+    "prop-types": "^15.7.2",
     "ramda": "^0.26.1",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
@@ -27,5 +26,18 @@
   "license": "MIT",
   "keywords": [],
   "description": "A Marvel universe of characters, comics and stories navigator.",
-  "devDependencies": {}
+  "devDependencies": {
+    "@zeit/next-sass": "^1.0.1",
+    "eslint": "^6.7.1",
+    "eslint-config-airbnb": "^18.0.1",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.16.0",
+    "eslint-plugin-react-hooks": "^1.7.0",
+    "imagemin-svgo": "^7.0.0",
+    "next-compose-plugins": "^2.2.0",
+    "next-offline": "^4.0.6",
+    "next-optimized-images": "^2.5.4",
+    "node-sass": "^4.13.0"
+  }
 }
