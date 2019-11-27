@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react'
 import { useRouter } from 'next/router'
 
-import useDidUpdate from '../../services/useDidUpdateHook'
+import useDidUpdate from '../../hooks/useDidUpdateHook'
 import LoadMoreBtn from '../buttons/loadMoreBtn'
 
 const ContinousLoadingGrid = ({ cards, total, onLoadMore, cardItemRender }) => {
