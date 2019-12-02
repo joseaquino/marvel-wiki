@@ -21,7 +21,8 @@
     "ramda": "^0.26.1",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
-    "react-window": "^1.8.5"
+    "react-window": "^1.8.5",
+    "union-type": "^0.4.1"
   },
   "license": "MIT",
   "keywords": [],
