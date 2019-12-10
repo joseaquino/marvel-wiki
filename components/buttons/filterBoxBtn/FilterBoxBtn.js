@@ -6,7 +6,6 @@ import constant from 'crocks/combinators/constant'
 import either from 'crocks/pointfree/either'
 import equals from 'crocks/pointfree/equals'
 import getPathOr from 'crocks/helpers/getPathOr'
-import getProp from 'crocks/Maybe/getProp'
 import map from 'crocks/pointfree/map'
 import not from 'crocks/logic/not'
 import option from 'crocks/pointfree/option'
@@ -16,6 +15,7 @@ import when from 'crocks/logic/when'
 
 import FilterIcon from '../../icons/FilterIcon'
 import ExpandableBtn from '../expandableBtn'
+import AutocompleteInput from '../../AutocompleteInput'
 import {
 	FilterBoxTab,
 	initState,
@@ -114,7 +114,7 @@ const FilterBoxBtn = ({ tabs, isOpen }) => {
 									)}
 								</select>,
 							Autocomplete: (label, key, val, dataSrc) =>
-								<p>Autocomplete box</p>
+								<AutocompleteInput key={label} searchEndpoint={dataSrc} label={label} />
 						})}
 						<input type="submit" value="Filter" />
 					</form>
