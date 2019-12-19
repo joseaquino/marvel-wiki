@@ -11,7 +11,7 @@
     "@zeit/next-sass": "^1.0.1",
     "imagemin-svgo": "^7.0.0",
     "isomorphic-unfetch": "^3.0.0",
-    "next": "latest",
+    "next": "^9.1.6",
     "next-compose-plugins": "^2.2.0",
     "next-offline": "^4.0.6",
     "next-optimized-images": "^2.5.4",
