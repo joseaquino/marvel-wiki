@@ -4,6 +4,28 @@ const AutocompleteContainer = styled.div`
 	position: relative;
 	margin-bottom: 24px;
 
+	::after, ::before {
+		position: absolute;
+		content: "";
+		top: ${({ isOpen }) => (isOpen ? '-6px' : '0')};
+		left: ${({ isOpen }) => (isOpen ? '-6px' : '0')};
+		z-index: -1;
+		right: ${({ isOpen }) => (isOpen ? '-6px' : '0')};
+		bottom: ${({ isOpen }) => (isOpen ? '-6px' : '0')};
+		border-radius: 10px;
+		transition: all 0.2s ease;
+	}
+
+	::before {
+		opacity: ${({ isOpen }) => (isOpen ? '1' : '0')};
+		transition: opacity 0.3s ease-in;
+		box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+	}
+
+	::after {
+		background: white;
+	}
+
 	&&&& input {
 		margin-bottom: 0px;
 
@@ -14,8 +36,6 @@ const AutocompleteContainer = styled.div`
 	}
 
 	ul, p {
-		position: absolute;
-		left: 0; top: 100%;
 		background-color: white;
 		width: 100%;
 		box-sizing: border-box;

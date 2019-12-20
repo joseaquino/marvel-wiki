@@ -6,17 +6,21 @@ import compose from 'crocks/helpers/compose'
 import constant from 'crocks/combinators/constant'
 import either from 'crocks/pointfree/either'
 import getPathOr from 'crocks/helpers/getPathOr'
+import getProp from 'crocks/Maybe/getProp'
 import ifElse from 'crocks/logic/ifElse'
 import isEmpty from 'crocks/predicates/isEmpty'
+import isFunction from 'crocks/predicates/isFunction'
+import isString from 'crocks/predicates/isString'
 import map from 'crocks/pointfree/map'
 import not from 'crocks/logic/not'
+import option from 'crocks/pointfree/option'
 import or from 'crocks/logic/or'
 import tap from 'crocks/helpers/tap'
 import then from 'ramda/src/then'
 import unit from 'crocks/helpers/unit'
 import when from 'crocks/logic/when'
 
-import { SearchResult } from './types'
+import { SearchResult, SearchTerm } from './types'
 import {
 	isElementActive,
 	isEventType,
@@ -26,12 +30,14 @@ import {
 	validateEndpoint,
 	validateResults
 } from './model'
-import useDebouncedState from '../../hooks/useDebouncedState'
+import useDebouncedFunc from '../../hooks/useDebouncedFunc'
 import AutocompleteContainer from './styles'
 
 // ============================================================================
 //  AutocompleteInput Component Definition
 // ============================================================================
+
+const COMPONENT_NAME = 'autocomplete-input'
 
 const AutocompleteInput = (props) => {
 	const {
@@ -43,7 +49,7 @@ const AutocompleteInput = (props) => {
 	} = props
 
 	const [searchResults, setSearchResults] = useState(SearchResult.Inactive([]))
-	const [searchTerm, setSearchTerm] = useDebouncedState(initialValue, delay)
+	const [searchTerm, setSearchTerm] = useState(SearchTerm.Modified(initialValue))
 	const searchTermElem = useRef(null)
 
 	// showErrorMessage :: AutocompleteError -> ()
@@ -66,18 +72,23 @@ const AutocompleteInput = (props) => {
 	)
 
 	// submitSearch :: String -> ()
-	const submitSearch = compose(
-		either(showErrorMessage, then(updateResults)),
+	const submitSearch = useDebouncedFunc(compose(
+		either(
+			showErrorMessage,
+			then(updateResults)
+		),
 		validateEndpoint,
 		searchEndpoint
-	)
+	), delay)
 
 	// isSearchTermElemActive :: () -> Boolean
 	const isSearchTermElemActive = () => isElementActive(searchTermElem.current)
 
 	// isSearchTermEmpty :: () -> Boolean
 	const isSearchTermEmpty = compose(
-		isEmpty,
+		SearchTerm.case({
+			_: isEmpty
+		}),
 		getSearchTerm
 	)
 
@@ -92,10 +103,12 @@ const AutocompleteInput = (props) => {
 		getSearchResults
 	)
 
+	const elemChildOfComponent = (elem) => (isFunction(elem.closest) ? elem.closest(`[name='${COMPONENT_NAME}'`) !== null : false)
+
 	// hideResults :: Event -> ()
 	const hideResults = when(
 		or(
-			and(isEventType('click'), not(isSearchTermElemActive)),
+			and(isEventType('click'), compose(option(true), map(not(elemChildOfComponent)), getProp('target'))),
 			and(isEventType('keyup'), isKeyCode('Escape'))
 		),
 		clearSearchResult
@@ -124,11 +137,28 @@ const AutocompleteInput = (props) => {
 		}
 	}
 
+	const handleResultSelection = compose(
+		setSearchTerm,
+		ifElse(
+			isString,
+			SearchTerm.Selected,
+			constant(SearchTerm.Selected(''))
+		),
+		onResultSelect
+	)
+
 	// handleInputChange :: Event -> ()
 	const handleInputChange = compose(
 		setSearchTerm,
+		SearchTerm.Modified,
 		when(
-			not(isEmpty),
+			and(
+				not(isEmpty),
+				compose(
+					not(SearchResult.isLoading),
+					getSearchResults
+				)
+			),
 			tap(showLoadingState)
 		),
 		getPathOr('', ['target', 'value'])
@@ -140,12 +170,10 @@ const AutocompleteInput = (props) => {
 	}), [searchResults])
 
 	useEffect(() => {
-		ifElse(
-			isEmpty,
-			clearSearchResult,
-			submitSearch,
-			searchTerm
-		)
+		SearchTerm.case({
+			Selected: clearSearchResult,
+			Modified: ifElse(isEmpty, clearSearchResult, submitSearch)
+		}, searchTerm)
 	}, [searchTerm])
 
 	return (
@@ -154,10 +182,12 @@ const AutocompleteInput = (props) => {
 				Inactive: constant(false),
 				_: constant(true)
 			}, searchResults)}
+			name={COMPONENT_NAME}
 		>
 			<input
 				label={`Search by ${label}`}
 				type="text"
+				value={searchTerm[0]}
 				onChange={handleInputChange}
 				onClick={showResults}
 				ref={searchTermElem}
@@ -172,7 +202,7 @@ const AutocompleteInput = (props) => {
 							<li key={result.id}>
 								<button
 									type="button"
-									onClick={() => onResultSelect(result)}
+									onClick={() => handleResultSelection(result)}
 								>
 									{result.text}
 								</button>
