@@ -114,6 +114,21 @@ const AutocompleteInput = (props) => {
 		clearSearchResult
 	)
 
+	// toggleLoading :: () -> ()
+	const toggleLoading = when(
+		and(
+			compose(
+				not(isEmpty),
+				getSearchTerm
+			),
+			compose(
+				not(SearchResult.isLoading),
+				getSearchResults
+			)
+		),
+		tap(showLoadingState)
+	)
+
 	// showResults :: () -> ()
 	const showResults = when(
 		and(isSearchTermElemActive, not(isSearchTermEmpty)),
@@ -137,6 +152,7 @@ const AutocompleteInput = (props) => {
 		}
 	}
 
+	// handleResultSelection :: {id: Number, text: String} -> ()
 	const handleResultSelection = compose(
 		setSearchTerm,
 		ifElse(
@@ -151,16 +167,6 @@ const AutocompleteInput = (props) => {
 	const handleInputChange = compose(
 		setSearchTerm,
 		SearchTerm.Modified,
-		when(
-			and(
-				not(isEmpty),
-				compose(
-					not(SearchResult.isLoading),
-					getSearchResults
-				)
-			),
-			tap(showLoadingState)
-		),
 		getPathOr('', ['target', 'value'])
 	)
 
@@ -172,7 +178,14 @@ const AutocompleteInput = (props) => {
 	useEffect(() => {
 		SearchTerm.case({
 			Selected: clearSearchResult,
-			Modified: ifElse(isEmpty, clearSearchResult, submitSearch)
+			Modified: ifElse(
+				isEmpty,
+				clearSearchResult,
+				compose(
+					submitSearch,
+					tap(toggleLoading)
+				)
+			)
 		}, searchTerm)
 	}, [searchTerm])
 
