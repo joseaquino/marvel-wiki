@@ -1,11 +1,11 @@
 @import 'variables/colors';
 
-.filter-box-container {
+.filterBoxContainer {
 	position: relative;
 	display: inline-block;
 	padding-bottom: 24px;
 
-	.filter-box {
+	.filterBox {
 		position: absolute;
 		top: 100%; left: 0;
 		z-index: -1;
@@ -18,7 +18,7 @@
 		opacity: 0;
 		transition: transform 0.4s ease, opacity 0.4s ease;
 
-		&-open {
+		&Open {
 			z-index: 50;
 			transform: translate(0, 0);
 			opacity: 1;
@@ -36,7 +36,7 @@
 			z-index: -1;
 		}
 
-		.filter-box-tabs {
+		.filterBoxTabs {
 			display: grid;
 			grid-template-columns: 1fr 1fr 1fr;
 			border-bottom: 3px solid $marvel-red;

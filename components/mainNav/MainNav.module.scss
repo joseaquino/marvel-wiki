@@ -1,10 +1,22 @@
 @import 'variables/colors';
 
-.nav-container {
+.navContainer {
 	margin: 0 auto;
 	margin-top: 60px;
 	text-align: center;
 	position: relative;
+
+	@media only screen and (min-width: 768px) {
+		max-width: 768px;
+	}
+
+	@media only screen and (min-width: 1024px) {
+		max-width: 1024px;
+	}
+
+	@media only screen and (min-width: 1500px) {
+		max-width: 1500px;
+	}
 
 	nav {
 		border: 3px solid $marvel-red;
@@ -36,37 +48,36 @@
 			}
 		}
 
-		.active-indicator {
-			position: absolute;
-			top: -3px;
-			bottom: -3px;
-			transition: left .2s ease;
-			width: 33.333%;
-			background-color: $marvel-red;
-			z-index: 0;
-			border-radius: 24px;
-		}
-
-		#characters-nav.active ~ .active-indicator {
-			left: 0;
-		}
-
-		#comics-nav.active ~ .active-indicator {
-			left: 33.333%;
-		}
-
-		#bookmarks-nav.active ~ .active-indicator {
-			left: 66.666%;
-		}
 	}
 
-	.page-filters {
+	.pageFilters {
 		position: absolute;
 		top: 0;
 		left: 0;
+	}
 
-		.filter-container .expandable-btn {
-			margin-right: 12px;
+	.activeIndicator {
+		position: absolute;
+		top: -3px;
+		bottom: -3px;
+		transition: left .2s ease;
+		width: 33.333%;
+		background-color: $marvel-red;
+		z-index: 0;
+		border-radius: 24px;
+	}
+
+	.active {
+		&#charactersNav ~ .activeIndicator {
+			left: 0;
+		}
+
+		&#comicsNav ~ .activeIndicator {
+			left: 33.333%;
+		}
+
+		&#bookmarksNav ~ .activeIndicator {
+			left: 66.666%;
 		}
 	}
 }

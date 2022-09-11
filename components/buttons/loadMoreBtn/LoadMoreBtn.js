@@ -1,34 +1,37 @@
-import React, { useState } from 'react'
+import React, { useState } from "react";
 
-import './LoadMoreBtn.scss'
+import style from "./LoadMoreBtn.module.scss";
 
 const LoadMoreBtn = ({ loaderFunc }) => {
-	const [loading, setLoadingState] = useState(false)
+  const [loading, setLoadingState] = useState(false);
 
-	const loadMoreItems = () => {
-		setLoadingState(true)
-		return loaderFunc().then(() => setLoadingState(false))
-	}
+  const loadMoreItems = () => {
+    setLoadingState(true);
+    return loaderFunc().then(() => setLoadingState(false));
+  };
 
-	return (
-		<div className="load-more-btn-container">
-			<button
-				className={
-					loading
-					? "load-more-btn loading"
-					: "load-more-btn"
-				}
-				type="button"
-				onClick={loadMoreItems}
-			>
-				{
-					loading
-					? <div className="loader"><div></div><div></div><div></div><div></div></div>
-					: "Load More..."
-				}
-			</button>
-		</div>
-	)
-}
+  return (
+    <div className={style.loadMoreBtnContainer}>
+      <button
+        className={
+          loading ? `${style.loadMoreBtn} ${style.loading}` : style.loadMoreBtn
+        }
+        type="button"
+        onClick={loadMoreItems}
+      >
+        {loading ? (
+          <div className={style.loader}>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+        ) : (
+          "Load More..."
+        )}
+      </button>
+    </div>
+  );
+};
 
-export default LoadMoreBtn
+export default LoadMoreBtn;

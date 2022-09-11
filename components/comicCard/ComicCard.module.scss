@@ -1,11 +1,11 @@
 @import 'variables/colors';
 
-.comic-card {
+.comicCard {
 	position: relative;
 	display: inline-grid;
 	overflow: hidden;
 
-	&:hover .comic-portrait-frame {
+	&:hover .comicPortraitFrame {
 		transform: scale(0.826271186441);
 	}
 
@@ -15,7 +15,7 @@
 		position: relative;
 		display: block;
 
-		.comic-portrait-frame {
+		.comicPortraitFrame {
 			border-radius: 15px;
 			background-color: $bright-yellow;
 			padding: 1px 1px 10px 10px;
@@ -24,7 +24,7 @@
 			position: relative;
 			z-index: 1;
 
-			.comic-portrait {
+			.comicPortrait {
 				height: 0;
 				overflow: hidden;
 				width: 100%;
@@ -35,7 +35,7 @@
 			}
 		}
 
-		.comic-details {
+		.comicDetails {
 			position: absolute;
 			left: 20px;
 			top: 24px;

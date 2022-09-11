@@ -33,8 +33,7 @@ img {
 }
 
 @media only screen  and (min-width: 768px) {
-	.main-container,
-	.nav-container {
+	.main-container {
 		max-width: 768px;
 	}
 
@@ -44,8 +43,7 @@ img {
 }
 
 @media only screen  and (min-width: 1024px) {
-	.main-container,
-	.nav-container {
+	.main-container {
 		max-width: 1024px;
 	}
 
@@ -55,8 +53,7 @@ img {
 }
 
 @media only screen  and (min-width: 1500px) {
-	.main-container,
-	.nav-container {
+	.main-container {
 		max-width: 1500px;
 	}
 
@@ -233,5 +230,15 @@ img {
 		height: 0;
 		padding-top: 119.444444444%;
 		max-width: 860px;
+	}
+}
+
+#nprogress .bar {
+	background-color: $bright-yellow;
+	height: 3px;
+	z-index: 5;
+
+	.peg {
+		box-shadow: 0 0 10px $bright-yellow, 0 0 5px $bright-yellow;
 	}
 }

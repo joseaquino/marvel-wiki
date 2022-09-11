@@ -17,9 +17,14 @@ const CharactersPage = ({ characters, total }) =>
 		/>
 	</>
 
-CharactersPage.getInitialProps = async ({ query }) => {
-	const response = await getCharactersList(query)
-	return response
-}
+export async function getServerSideProps({ query }) {
+	const { characters, total } = await getCharactersList(query)
+	return {
+	  props: {
+		characters,
+		total
+	  },
+	}
+  }
 
 export default CharactersPage
