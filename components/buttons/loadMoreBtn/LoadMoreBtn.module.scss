@@ -1,12 +1,12 @@
 @import 'variables/colors';
 
-.load-more-btn-container {
+.loadMoreBtnContainer {
 	display: grid;
 	grid-template-columns: repeat(5, 1fr);
 	grid-column-gap: 2rem;
 	margin: 48px 0;
 
-	.load-more-btn {
+	.loadMoreBtn {
 		background-color: $thanos-purple-400;
 		height: 60px;
 		text-align: center;

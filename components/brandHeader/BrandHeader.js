@@ -1,17 +1,18 @@
 import React from "react";
-import Link from 'next/link'
+import Link from "next/link";
 
-import './BrandHeader.scss'
+import style from "./BrandHeader.module.scss";
+import { MarvelLogo } from "./MarvelLogo";
 
 const BrandHeader = () => (
-	<div className="brand-header">
-		<Link href="/">
-			<a className="brand-logo">
-				<img src={require('../../assets/images/marvel-logo.svg')} alt="Marvel comics logo image"/>
-			</a>
-		</Link>
-		<div id="progress-bar" />
-	</div>
+  <div className={style.brandHeader}>
+    <Link href="/">
+      <a className={style.brandLogo}>
+	  	<MarvelLogo />
+      </a>
+    </Link>
+    <div id={style.progressBar} />
+  </div>
 );
 
-export default BrandHeader
+export default BrandHeader;

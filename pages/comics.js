@@ -17,9 +17,14 @@ const ComicsPage = ({ comics, total }) =>
 		/>
 	</>
 
-ComicsPage.getInitialProps = async ({ query }) => {
-	const response = await getComicsList(query)
-	return response
+export async function getServerSideProps({ query }) {
+	const { comics, total } = await getComicsList(query)
+	return {
+		props: {
+			comics,
+			total
+		}
+	}
 }
 
 export default ComicsPage

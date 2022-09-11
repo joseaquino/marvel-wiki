@@ -3,27 +3,27 @@
   "short_name": "Marvel Wiki",
   "icons": [
     {
-      "src": "/static/marvel-wiki-icon-128.png",
+      "src": "/marvel-wiki-icon-128.png",
       "sizes": "128x128",
       "type": "image/png"
     },
     {
-      "src": "/static/marvel-wiki-icon-144.png",
+      "src": "/marvel-wiki-icon-144.png",
       "sizes": "144x144",
       "type": "image/png"
     },
     {
-      "src": "/static/marvel-wiki-icon-152.png",
+      "src": "/marvel-wiki-icon-152.png",
       "sizes": "152x152",
       "type": "image/png"
     },
     {
-      "src": "/static/marvel-wiki-icon-192.png",
+      "src": "/marvel-wiki-icon-192.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "/static/marvel-wiki-icon-256.png",
+      "src": "/marvel-wiki-icon-256.png",
       "sizes": "256x256",
       "type": "image/png"
     }

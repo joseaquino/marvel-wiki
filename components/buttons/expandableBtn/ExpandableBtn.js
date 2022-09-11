@@ -1,37 +1,40 @@
-import React, { useState } from 'react'
+import React, { useState } from "react";
 
-import './ExpandableBtn.scss'
+import style from "./ExpandableBtn.module.scss";
 
 const ExpandableBtn = ({ hoverWidth, text, icon, action, keepOpen }) => {
-	const Icon = icon
-	const defaultWidth = '48px'
-	const [width, setWidth] = useState(defaultWidth)
+  const Icon = icon;
+  const defaultWidth = "48px";
+  const [width, setWidth] = useState(defaultWidth);
 
-	const expandButton = () => setWidth(hoverWidth)
+  const expandButton = () => setWidth(hoverWidth);
 
-	const contractButton = () => keepOpen ? null : setWidth(defaultWidth)
+  const contractButton = () => (keepOpen ? null : setWidth(defaultWidth));
 
-	const callAction = () =>
-		typeof(action) === 'function'
-			? action()
-			: null
+  const callAction = () => (typeof action === "function" ? action() : null);
 
-	return (
-		<button
-			className={ keepOpen ? "keep-open expandable-btn" : "expandable-btn" }
-			type="button"
-			onClick={callAction}
-			onMouseEnter={expandButton}
-			onFocus={expandButton}
-			onBlur={contractButton}
-			onMouseLeave={contractButton}
-			style={{ width }}
-			aria-label="text"
-		>
-			<div className="btn-icon"><Icon /></div>
-			<span>{text}</span>
-		</button>
-	)
-}
+  return (
+    <button
+      className={
+        keepOpen
+          ? `${style.keepOpen} ${style.expandableBtn}`
+          : style.expandableBtn
+      }
+      type="button"
+      onClick={callAction}
+      onMouseEnter={expandButton}
+      onFocus={expandButton}
+      onBlur={contractButton}
+      onMouseLeave={contractButton}
+      style={{ width }}
+      aria-label="text"
+    >
+      <div className={style.btnIcon}>
+        <Icon />
+      </div>
+      <span>{text}</span>
+    </button>
+  );
+};
 
-export default ExpandableBtn
+export default ExpandableBtn;

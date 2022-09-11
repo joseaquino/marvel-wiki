@@ -1,6 +1,6 @@
 @import 'variables/colors';
 
-.expandable-btn {
+.expandableBtn {
 	background-color: $thanos-purple-400;
 	border: 3px solid $marvel-red;
 	color: $thanos-purple-300;
@@ -22,7 +22,7 @@
 		display: none;
 	}
 
-	.btn-icon {
+	.btnIcon {
 		display: inline-grid;
 		height: 42px;
 		width: 42px;
@@ -36,7 +36,7 @@
 		}
 	}
 
-	&:hover, &:focus, &.keep-open {
+	&:hover, &:focus, &.keepOpen {
 		cursor: pointer;
 		background-color: $marvel-red;
 		color: white;

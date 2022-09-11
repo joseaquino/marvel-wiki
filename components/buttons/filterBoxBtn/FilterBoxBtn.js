@@ -1,96 +1,97 @@
-import React, { useRef, useState } from 'react'
-import Router, { useRouter } from 'next/router'
+import React, { useState } from "react";
+import Router, { useRouter } from "next/router";
 
-import FilterIcon from '../../icons/FilterIcon'
-import ExpandableBtn from '../expandableBtn'
+import FilterIcon from "../../icons/FilterIcon";
+import ExpandableBtn from "../expandableBtn";
 
-import { toQueryString } from '../../../services/marvelApi'
+import { toQueryString } from "../../../services/marvelApi";
 
-import './FilterBoxBtn.scss'
+import style from "./FilterBoxBtn.module.scss";
 
 const FilterBoxBtn = ({ tabs, isOpen, onBtnClick }) => {
-	const router = useRouter()
-	const workingTabs = useRef(tabs)
-	const [activeTab, setActiveTab] = useState(() => {
-		let tabActiveFromQuery = workingTabs.current.reduce(
-			(active, tab) => {
-				if (router.query.filterBy === tab.queryKey) {
-					return {...tab, value: router.query.searchQuery }
-				}
+  const router = useRouter();
+  const [activeTab, setActiveTab] = useState(() => {
+    let tabActiveFromQuery = tabs.reduce((active, tab) => {
+      if (router.query.filterBy === tab.queryKey) {
+        return { ...tab, value: router.query.searchQuery };
+      }
 
-				return active
-			},
-			null
-		)
+      return active;
+    }, null);
 
-		if (tabActiveFromQuery === null && workingTabs.current[0]) {
-			return workingTabs.current[0]
-		} else if (tabActiveFromQuery) {
-			return tabActiveFromQuery
-		} else {
-			return {}
-		}
-	})
+    if (tabActiveFromQuery === null && tabs[0]) {
+      return tabs[0];
+    } else if (tabActiveFromQuery) {
+      return tabActiveFromQuery;
+    } else {
+      return {};
+    }
+  });
 
-	const handleFilterSubmit = evt => {
-		evt.preventDefault()
+  const handleFilterSubmit = (evt) => {
+    evt.preventDefault();
 
-		if (activeTab.value && activeTab.value.trim() !== '') { 
-			const query = {
-				...router.query,
-				filterBy: activeTab.queryKey,
-				searchQuery: activeTab.value
-			}
-			const url = `${router.pathname}${toQueryString(query)}`
-			Router.push(url)
-		}
-	}
+    if (activeTab.value && activeTab.value.trim() !== "") {
+      const query = {
+        ...router.query,
+        filterBy: activeTab.queryKey,
+        searchQuery: activeTab.value,
+      };
+      const url = `${router.pathname}${toQueryString(query)}`;
+      Router.push(url);
+    }
+  };
 
-	const updateActivetab = selectedTab => {
-		if (activeTab.queryKey !== selectedTab.queryKey) {
-			workingTabs.current = workingTabs.current.map(tab => tab.queryKey === activeTab.queryKey ? activeTab : tab)
-			setActiveTab(selectedTab)
-		}
-	}
+  const updateActivetab = (selectedTab) => {
+    if (activeTab.queryKey !== selectedTab.queryKey) {
+      tabs = tabs.map((tab) =>
+        tab.queryKey === activeTab.queryKey ? activeTab : tab
+      );
+      setActiveTab(selectedTab);
+    }
+  };
 
-	const updateTabValue = evt => setActiveTab({ ...activeTab, value: evt.target.value })
+  const updateTabValue = (evt) =>
+    setActiveTab({ ...activeTab, value: evt.target.value });
 
-	return (
-		<div className="filter-box-container">
-			<ExpandableBtn
-				hoverWidth="154px"
-				text="Filter by:"
-				icon={FilterIcon}
-				action={onBtnClick}
-				keepOpen={isOpen}
-			/>
-			<div className={ isOpen ? "filter-box filter-box-open" : "filter-box" }>
-				<div className="filter-box-tabs">
-					{
-						workingTabs.current.map(tab =>
-							<button
-								key={tab.queryKey}
-								type="button"
-								onClick={() => updateActivetab(tab)}
-								className={activeTab.queryKey === tab.queryKey ? 'active' : ''}
-							>
-								{ tab.text }
-							</button>
-						)
-					}
-				</div>
-				<form onSubmit={handleFilterSubmit}>
-					<input
-						label={`Search by ${activeTab.text}`}
-						type="text"
-						value={activeTab.value ? activeTab.value : ''}
-						onChange={updateTabValue}
-					/>
-					<input type="submit" value="Filter" />
-				</form>
-			</div>
-		</div>
-	)
-}
+  return (
+    <div className={style.filterBoxContainer}>
+      <ExpandableBtn
+        hoverWidth="154px"
+        text="Filter by:"
+        icon={FilterIcon}
+        action={onBtnClick}
+        keepOpen={isOpen}
+      />
+      <div
+        className={
+          isOpen ? `${style.filterBox} ${style.filterBoxOpen}` : style.filterBox
+        }
+      >
+        <div className={style.filterBoxTabs}>
+          {tabs.map((tab) => (
+            <button
+              key={tab.queryKey}
+              type="button"
+              onClick={() => updateActivetab(tab)}
+              className={activeTab.queryKey === tab.queryKey ? style.active : ""}
+            >
+              {tab.text}
+            </button>
+          ))}
+        </div>
+        <form onSubmit={handleFilterSubmit}>
+          <input
+            label={`Search by ${activeTab.text}`}
+            type="text"
+            value={activeTab.value ? activeTab.value : ""}
+            onChange={updateTabValue}
+          />
+          <input type="submit" value="Filter" />
+        </form>
+      </div>
+    </div>
+  );
+};
 
-export default FilterBoxBtn
+export default FilterBoxBtn;

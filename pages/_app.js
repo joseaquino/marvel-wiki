@@ -1,37 +1,23 @@
-import React from 'react'
-import App from 'next/app'
-import Head from 'next/head'
-import NProgress from 'nprogress'
-import Router from 'next/router'
+import NProgress from "nprogress";
+import Router from "next/router";
 
-import '../assets/styles/app.scss'
+import "../assets/styles/app.scss";
+import headerStyle from "../components/brandHeader/BrandHeader.module.scss"
 
-import BrandHeader from '../components/brandHeader'
-import MainNav from '../components/mainNav'
+import BrandHeader from "../components/brandHeader";
+import MainNav from "../components/mainNav";
 
-NProgress.configure({ parent: '#progress-bar', minimum: 0.25 })
-Router.events.on('routeChangeStart', () => NProgress.start())
-Router.events.on('routeChangeComplete', () => NProgress.done())
-Router.events.on('routeChangeError', () => NProgress.done())
+NProgress.configure({ parent: `#${headerStyle.progressBar}`, minimum: 0.25 });
+Router.events.on("routeChangeStart", () => NProgress.start());
+Router.events.on("routeChangeComplete", () => NProgress.done());
+Router.events.on("routeChangeError", () => NProgress.done());
 
-class MyApp extends App {
-	render() {
-		const { Component, pageProps } = this.props
-		return (
-			<>
-				<Head>
-					<meta name="theme-color" content="#ED1D24"/>
-					<link rel='manifest' href='/static/manifest.json' />
-					<link rel="apple-touch-icon" href="/static/marvel-wiki-icon-192.png" />
-					<link rel="Marvel Wiki fav icon" type="image/x-icon" href="/static/favicon.ico"/>
-					<link href="https://fonts.googleapis.com/css?family=PT+Sans:400,700&display=swap" rel="stylesheet" />
-				</Head>
-				<BrandHeader />
-				<MainNav />
-				<Component {...pageProps} />
-			</>
-		)
-	}
+export default function MyApp({ Component, pageProps }) {
+  return (
+    <>
+      <BrandHeader />
+      <MainNav />
+      <Component {...pageProps} />
+    </>
+  );
 }
-
-export default MyApp
