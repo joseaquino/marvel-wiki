@@ -1,0 +1,51 @@
+steps:
+  # Build the container image
+  - name: "gcr.io/cloud-builders/docker"
+    env:
+      - "DOCKER_BUILDKIT=1"
+    args:
+      [
+        "build",
+        "-t",
+        "$_IMAGE:$SHORT_SHA",
+        "-f",
+        "./Dockerfile",
+        "--cache-from",
+        "${_IMAGE}:latest",
+        ".",
+      ]
+
+  # Tag the container image as latest
+  - name: "gcr.io/cloud-builders/docker"
+    env:
+      - "DOCKER_BUILDKIT=1"
+    args: ["tag", "$_IMAGE:$SHORT_SHA", "$_IMAGE:latest"]
+
+  # Push the container image to Container Registry
+  - name: "gcr.io/cloud-builders/docker"
+    env:
+      - "DOCKER_BUILDKIT=1"
+    args: ["push", $_IMAGE]
+
+  # Deploy the container to Caprover
+  - name: "node"
+    env:
+      - CAPROVER_APP_TOKEN=$_APP_TOKEN
+      - CAPROVER_APP=$_APP_NAME
+      - CAPROVER_URL=$_APP_URL
+      - CAPROVER_IMAGE_NAME=$_IMAGE
+    script: |
+      #!/usr/bin/env bash
+      npm install -g caprover
+
+      caprover deploy
+
+substitutions:
+  _IMAGE: "us-central1-docker.pkg.dev/${PROJECT_ID}/pocket-apps/marvel-wiki"
+  _APP_NAME: ""
+  _APP_URL: ""
+  _APP_TOKEN: ""
+
+artifacts:
+  images:
+    - $_IMAGE:$SHORT_SHA

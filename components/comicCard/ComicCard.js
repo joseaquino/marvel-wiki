@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import React, { useEffect, useState } from "react";
 
-import style from "./ComicCard.module.scss";
-import BookmarkBtn from "../buttons/bookmarkBtn";
 import {
-  toggleComicBookmark,
   isComicBookmarked,
+  toggleComicBookmark,
 } from "../../services/bookmarks";
+import BookmarkBtn from "../buttons/bookmarkBtn";
+import style from "./ComicCard.module.scss";
 
 const ComicCard = ({
   id,
@@ -40,20 +40,16 @@ const ComicCard = ({
   return (
     <div className={style.comicCard}>
       <Link href="/comic/[comicID]" as={`/comic/${id}`} prefetch={false}>
-        <a>
-          <div className={style.comicPortraitFrame}>
-            <div
-              className={style.comicPortrait}
-              style={{ backgroundImage: `url(${thumbnail})` }}
-            />
-          </div>
-          <div className={style.comicDetails}>
-            <span>
-              Issue Number {issueNumber}
-            </span>
-            <p>{title}</p>
-          </div>
-        </a>
+        <div className={style.comicPortraitFrame}>
+          <div
+            className={style.comicPortrait}
+            style={{ backgroundImage: `url(${thumbnail})` }}
+          />
+        </div>
+        <div className={style.comicDetails}>
+          <span>Issue Number {issueNumber}</span>
+          <p>{title}</p>
+        </div>
       </Link>
       <span className={style.bookmarker}>
         <BookmarkBtn

@@ -1,7 +1,8 @@
 {
   "name": "marvel-wiki-app",
+  "description": "A Marvel universe of characters, comics and stories navigator.",
   "version": "1.0.0",
-  "author": "Jose Aquino <joseaquino@logikode.tech",
+  "author": "Jose G. Aquino <joseaquino@logikode.tech",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -10,15 +11,14 @@
   },
   "dependencies": {
     "isomorphic-unfetch": "^3.0.0",
-    "next": "12.3.0",
+    "next": "^14.2.3",
     "nprogress": "^0.2.0",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "react-window": "^1.8.5"
   },
   "license": "MIT",
   "keywords": [],
-  "description": "A Marvel universe of characters, comics and stories navigator.",
   "devDependencies": {
     "sass": "^1.54.9"
   }
