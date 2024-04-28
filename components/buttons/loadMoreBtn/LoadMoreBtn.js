@@ -27,7 +27,7 @@ const LoadMoreBtn = ({ loaderFunc }) => {
             <div></div>
           </div>
         ) : (
-          "Load More..."
+          "CLick to Load More..."
         )}
       </button>
     </div>
