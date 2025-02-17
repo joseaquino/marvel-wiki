@@ -10,16 +10,17 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "isomorphic-unfetch": "^3.0.0",
-    "next": "^14.2.3",
+    "isomorphic-unfetch": "^4.0.2",
+    "next": "^15.1.7",
     "nprogress": "^0.2.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-window": "^1.8.5"
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-window": "^1.8.11"
   },
   "license": "MIT",
   "keywords": [],
   "devDependencies": {
-    "sass": "^1.54.9"
-  }
+    "sass": "^1.85.0"
+  },
+  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
 }

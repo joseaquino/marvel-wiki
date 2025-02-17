@@ -1,4 +1,4 @@
-@import 'variables/colors';
+@use 'variables/colors';
 
 .bookmarkBtn {
 	background: none;
@@ -14,13 +14,13 @@
 		height: 48px;
 
 		path {
-			stroke: $thanos-purple-400;
-			fill: $gray-100;
+			stroke: colors.$thanos-purple-400;
+			fill: colors.$gray-100;
 		}
 	}
 
 	&.bookmarked svg path {
-		stroke: $thanos-purple-500;
-		fill: $marvel-red;
+		stroke: colors.$thanos-purple-500;
+		fill: colors.$marvel-red;
 	}
 }

@@ -27,24 +27,19 @@ steps:
       - "DOCKER_BUILDKIT=1"
     args: ["push", $_IMAGE]
 
-  # Deploy the container to Caprover
-  - name: "node"
-    env:
-      - CAPROVER_APP_TOKEN=$_APP_TOKEN
-      - CAPROVER_APP=$_APP_NAME
-      - CAPROVER_URL=$_APP_URL
-      - CAPROVER_IMAGE_NAME=$_IMAGE
-    script: |
-      #!/usr/bin/env bash
-      npm install -g caprover
-
-      caprover deploy
+  # Deploy container image to Dokploy instance
+  - name: "gcr.io/cloud-builders/gcloud"
+    entrypoint: "bash"
+    args:
+      - "-c"
+      - |
+        RESPONSE=$(curl -o /dev/null -s -w "%{http_code}" --request POST --url $$_DOKPLOY_WEBHOOK_URL --header "Content-Type: application/json" --header "X-GITHUB-EVENT: push" --data "{\"head_commit\": {\"id\": \"$SHORT_SHA\", \"message\": \"Deploying $_APP_NAME to Dokploy\"}}")
+        if [ "200" != "$$RESPONSE" ]; then exit 1; fi
 
 substitutions:
-  _IMAGE: "us-central1-docker.pkg.dev/${PROJECT_ID}/pocket-apps/marvel-wiki"
-  _APP_NAME: ""
-  _APP_URL: ""
-  _APP_TOKEN: ""
+  _IMAGE: "us-central1-docker.pkg.dev/${PROJECT_ID}/pocket-apps/${_APP_NAME}"
+  _APP_NAME: "marvel-wiki"
+  _DOKPLOY_WEBHOOK_URL: ""
 
 artifacts:
   images:

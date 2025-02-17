@@ -1,9 +1,9 @@
-@import 'variables/colors';
+@use 'variables/colors';
 
 .expandableBtn {
-	background-color: $thanos-purple-400;
-	border: 3px solid $marvel-red;
-	color: $thanos-purple-300;
+	background-color: colors.$thanos-purple-400;
+	border: 3px solid colors.$marvel-red;
+	color: colors.$thanos-purple-300;
 	height: 48px;
 	border-radius: 24px;
 	transition: background-color 0.2s ease, width 0.2s ease-in-out;
@@ -32,13 +32,13 @@
 		top: 0; left: 0;
 
 		svg path {
-			fill: $thanos-purple-300;
+			fill: colors.$thanos-purple-300;
 		}
 	}
 
 	&:hover, &:focus, &.keepOpen {
 		cursor: pointer;
-		background-color: $marvel-red;
+		background-color: colors.$marvel-red;
 		color: white;
 
 		svg path {

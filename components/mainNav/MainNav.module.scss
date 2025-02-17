@@ -1,4 +1,4 @@
-@import 'variables/colors';
+@use 'variables/colors';
 
 .navContainer {
 	margin: 0 auto;
@@ -19,13 +19,13 @@
 	}
 
 	nav {
-		border: 3px solid $marvel-red;
+		border: 3px solid colors.$marvel-red;
 		width: 528px;
 		height: 48px;
 		border-radius: 24px;
 		box-sizing: border-box;
 		display: inline-block;
-		background-color: $thanos-purple-400;
+		background-color: colors.$thanos-purple-400;
 		position: relative;
 
 		a {
@@ -35,7 +35,7 @@
 			line-height: 42px;
 			font-size: 1.5rem;
 			text-transform: uppercase;
-			color: $gray-100;
+			color: colors.$gray-100;
 			text-decoration: none;
 			display: inline-block;
 			z-index: 1;
@@ -62,7 +62,7 @@
 		bottom: -3px;
 		transition: left .2s ease;
 		width: 33.333%;
-		background-color: $marvel-red;
+		background-color: colors.$marvel-red;
 		z-index: 0;
 		border-radius: 24px;
 	}

@@ -1,4 +1,4 @@
-@import 'variables/colors';
+@use 'variables/colors';
 
 .comicCard {
 	position: relative;
@@ -17,7 +17,7 @@
 
 		.comicPortraitFrame {
 			border-radius: 15px;
-			background-color: $bright-yellow;
+			background-color: colors.$bright-yellow;
 			padding: 1px 1px 10px 10px;
 			transform-origin: top left;
 			transition: transform 0.2s ease;

@@ -1,14 +1,14 @@
-@import 'reset';
-@import 'variables/colors';
-@import '~nprogress/nprogress';
-@import 'bookmarks';
+@use 'reset';
+@use 'variables/colors';
+@use '~nprogress/nprogress';
+@use 'bookmarks';
 
 html {
 	font-size: 10px;
 }
 
 body {
-	background-color: $thanos-purple-500;
+	background-color: colors.$thanos-purple-500;
 	font-size: 1.5rem;
 	font-family: 'PT Sans', sans-serif;
 }
@@ -63,7 +63,7 @@ img {
 }
 
 .main-container.detail-page {
-	background-color: $cream-500;
+	background-color: colors.$cream-500;
 	border-radius: 24px;
 	overflow: hidden;
 	padding: 30px 86px 78px;
@@ -79,7 +79,7 @@ img {
 		content: '';
 		position: absolute;
 		top: 0; left: 0; bottom: 0;
-		background-color: $cream-600;
+		background-color: colors.$cream-600;
 		width: 23.4489051095%;
 		z-index: 0;
 	}
@@ -117,7 +117,7 @@ img {
 
 	.detail-info {
 		h1 {
-			background-color: $bright-yellow;
+			background-color: colors.$bright-yellow;
 			font-size: 3.0rem;
 			line-height: 3.0rem;
 			color: black;
@@ -136,7 +136,7 @@ img {
 
 		.detail-divider {
 			height: 3px;
-			background-color: $thanos-purple-600;
+			background-color: colors.$thanos-purple-600;
 		}
 
 		h2 {
@@ -172,12 +172,12 @@ img {
 				width: 12px;
 				height: 12px;
 				border-radius: 6px;
-				background-color: $bright-yellow;
+				background-color: colors.$bright-yellow;
 			}
 		}
 
 		.no-value {
-			background-color: $cream-600;
+			background-color: colors.$cream-600;
 			padding: 24px 24px;
 			border-radius: 6px;
 			display: block;
@@ -195,11 +195,11 @@ img {
 
 	h1 {
 		font-size: 5.0rem;
-		color: $marvel-red;
+		color: colors.$marvel-red;
 		font-weight: bold;
 		padding-top: 6.0rem;
 		padding-bottom: 1.5rem;
-		border-bottom: 3px solid $marvel-red;
+		border-bottom: 3px solid colors.$marvel-red;
 	}
 
 	p {
@@ -211,7 +211,7 @@ img {
 
 	a {
 		color: white;
-		background-color: $marvel-red;
+		background-color: colors.$marvel-red;
 		text-decoration: none;
 		border: 3px solid white;
 		padding: 1.5rem 2.4rem;
@@ -234,11 +234,11 @@ img {
 }
 
 #nprogress .bar {
-	background-color: $bright-yellow;
+	background-color: colors.$bright-yellow;
 	height: 3px;
 	z-index: 5;
 
 	.peg {
-		box-shadow: 0 0 10px $bright-yellow, 0 0 5px $bright-yellow;
+		box-shadow: 0 0 10px colors.$bright-yellow, 0 0 5px colors.$bright-yellow;
 	}
 }

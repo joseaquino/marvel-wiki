@@ -1,4 +1,4 @@
-@import 'variables/colors';
+@use 'variables/colors';
 
 .filterBoxContainer {
 	position: relative;
@@ -9,8 +9,8 @@
 		position: absolute;
 		top: 100%; left: 0;
 		z-index: -1;
-		background-color: $thanos-purple-400;
-		border: 3px solid  $marvel-red;
+		background-color: colors.$thanos-purple-400;
+		border: 3px solid  colors.$marvel-red;
 		box-sizing: border-box;
 		width: 360px;
 		border-radius: 12px;
@@ -29,7 +29,7 @@
 			width: 24px;
 			height: 24px;
 			border-radius: 3px;
-			background-color: $marvel-red;
+			background-color: colors.$marvel-red;
 			position: absolute;
 			top: -14px; left: 60px;
 			transform: rotate(45deg);
@@ -39,12 +39,12 @@
 		.filterBoxTabs {
 			display: grid;
 			grid-template-columns: 1fr 1fr 1fr;
-			border-bottom: 3px solid $marvel-red;
+			border-bottom: 3px solid colors.$marvel-red;
 			border-radius: 6px 6px 0 0;
 			overflow: hidden;
 
 			button {
-				background-color: $thanos-purple-600;
+				background-color: colors.$thanos-purple-600;
 				color: white;
 				font-weight: bold;
 				text-align: center;
@@ -52,8 +52,8 @@
 				line-height: 3.5rem;
 				vertical-align: middle;
 				border: none;
-				border-left: 1px solid $marvel-red;
-				border-right: 1px solid $marvel-red;
+				border-left: 1px solid colors.$marvel-red;
+				border-right: 1px solid colors.$marvel-red;
 
 				&:first-child {
 					border-left: none;
@@ -68,7 +68,7 @@
 				}
 
 				&.active {
-					background: $marvel-red;
+					background: colors.$marvel-red;
 				}
 			}
 		}
@@ -87,11 +87,11 @@
 					margin-bottom: 24px;
 					height: 36px;
 					padding: 6px;
-					background-color: $gray-100;
+					background-color: colors.$gray-100;
 				}
 
 				&[type="submit"] {
-					background-color: $marvel-red;
+					background-color: colors.$marvel-red;
 					text-transform: uppercase;
 					color: white;
 					font-size: 1.8rem;

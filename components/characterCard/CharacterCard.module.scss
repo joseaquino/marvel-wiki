@@ -1,4 +1,4 @@
-@import 'variables/colors';
+@use 'variables/colors';
 
 .characterCard {
 	position: relative;
@@ -7,7 +7,7 @@
 
 	a {
 		text-decoration: none;
-		color: $thanos-purple-500;
+		color: colors.$thanos-purple-500;
 		border-radius: 12px;
 		overflow: hidden;
 		display: block;
@@ -26,7 +26,7 @@
 				height: 0;
 				padding-top: 82.3529411765%;
 				overflow: hidden;
-				background-color: $thanos-purple-500;
+				background-color: colors.$thanos-purple-500;
 				background-size: cover;
 				display: block;
 				transition: transform 0.2s ease;
@@ -43,7 +43,7 @@
 		p {
 			font-size: 2.4rem;
 			font-weight: bold;
-			background-color: $bright-yellow;
+			background-color: colors.$bright-yellow;
 			line-height: 3.6rem;
 			vertical-align: middle;
 			padding: 0 18px 12px;

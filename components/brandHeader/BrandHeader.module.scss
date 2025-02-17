@@ -1,8 +1,8 @@
-@import 'variables/colors';
+@use 'variables/colors';
 
 .brandHeader {
 	height: 48px;
-	background-color: $marvel-red;
+	background-color: colors.$marvel-red;
 	position: relative;
 	text-align: center;
 
