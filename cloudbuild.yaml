@@ -33,8 +33,17 @@ steps:
     args:
       - "-c"
       - |
-        RESPONSE=$(curl -o /dev/null -s -w "%{http_code}" --request POST --url $$_DOKPLOY_WEBHOOK_URL --header "Content-Type: application/json" --header "X-GITHUB-EVENT: push" --data "{\"head_commit\": {\"id\": \"$SHORT_SHA\", \"message\": \"Deploying $_APP_NAME to Dokploy\"}}")
-        if [ "200" != "$$RESPONSE" ]; then exit 1; fi
+        RESPONSE=$(curl -o /dev/null -s -w "%{http_code}" --request POST --url $_DOKPLOY_WEBHOOK_URL \
+          --header "Content-Type: application/json" \
+          --header "X-GITHUB-EVENT: push" \
+          --data "{\"head_commit\": {\"id\": \"$SHORT_SHA\", \"message\": \"Deploying $_APP_NAME to Dokploy\"}}")
+
+        if [ "$$RESPONSE" != "200" ]; then
+          echo "Failed to deploy to Dokploy, response code: $$RESPONSE"
+          exit 1
+        else
+          echo "Successfully deployed to Dokploy, response code: $$RESPONSE"
+        fi
 
 substitutions:
   _IMAGE: "us-central1-docker.pkg.dev/${PROJECT_ID}/pocket-apps/${_APP_NAME}"
